@@ -9,11 +9,11 @@ const PrivateRoute = ({ Component, ...rest }) => {
   // Add your authentication logic here
  
   const tokenExpiration = localStorage.getItem("tokenExpiration");
-  useEffect(() => {
-    if (token1!==""){ settoken1(localStorage.getItem("token"))}
-    else{navigate("/login")}
-    console.log("token1", token1); 
-  }, [token1])
+  // useEffect(() => {
+  //   if (token1!==""){ settoken1(localStorage.getItem("token"))}
+  //   else{navigate("/login")}
+  //   console.log("token1", token1); 
+  // }, [token1])
   
   return token1 && tokenExpiration && Date.now() < parseInt(tokenExpiration) ? (
     <Component {...rest} />
