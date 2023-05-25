@@ -26,7 +26,7 @@ import AboutBooking from "./pages/AboutBooking";
 import PayRent from "./pages/PayRent";
 import MyAds from "./pages/MyAds";
 import ViewTenant from "./pages/ViewTenant";
-import firebase, { messaging } from "./firebase/index";
+import firebase, { messaging, onMessageListener } from "./firebase/index";
 import { getToken } from "firebase/messaging";
 import StripePaymentCancel from "./pages/StripePaymentCancel";
 import axios from "axios";
@@ -34,15 +34,18 @@ import ChatBody from "./components/Chat/ChatBody";
 
 const App = () => {
 
+  // const [show, setShow] = useState(false);
+  // const [notification, setNotification] = useState({ title: "", body: "" });
+
   const notificationpremision= async ()=>{
    const permission = await Notification.requestPermission()
    if(permission==='granted'){
-  //    const token = await getToken(messaging, {
-  //      vapidKey:
-  //      "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
-  //     });
-  //     console.log("tojen", token);
-  console.log("tojen", permission);
+     const token = await getToken(messaging, {
+       vapidKey:
+       "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
+      });
+      console.log("tojen", token);
+  // console.log("tojen", permission);
    }
    else if(permission==="denied"){
     alert("You denied for the notification")
@@ -54,6 +57,22 @@ const App = () => {
    
   }, [])
 
+//   onMessageListener()
+//     .then((payload) => {
+//       // console.log(payload, "payload");
+//       setShow(true);
+//       setNotification({
+//         title: payload.notification.title,
+//         body: payload.notification.body,
+//       });
+//       <Alert severity="success" color="info">
+  
+// </Alert>
+//     })
+//     .catch((err) => console.log("failed: ", err));
+    
+    // console.log("notification", notification);
+    
   
   return (
     <Router>

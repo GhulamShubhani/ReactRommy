@@ -10,6 +10,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import firebase, { messaging, onMessageListener } from "../firebase/index";
 
 const MyAccount = () => {
   const user = JSON.parse(Cookies.get("user"));
@@ -18,6 +19,25 @@ const MyAccount = () => {
   const viewProfileHandle = () => {
     navigate("/viewProfile");
   };
+
+   onMessageListener()
+     .then((payload) => {
+       console.log(payload, "payload");
+      //  setShow(true);
+      //  setNotification({
+      //    title: payload.notification.title,
+      //    body: payload.notification.body,
+      //  });
+       alert(payload.notification.title);
+       // <Alert severity="success" color="info">
+       //   Title:payload.notification.title
+       // </Alert>;
+     })
+     .catch((err) => console.log("failed: ", err));
+
+  const testNotification = ()=>{
+
+  }
 
   return (
     <>
@@ -110,7 +130,7 @@ const MyAccount = () => {
                 </Box>
 
                 <Box>
-                  <Typography>Notifications</Typography>
+                  <Typography onClick={testNotification}>Notifications</Typography>
                   <Typography>0 unread notifications</Typography>
                 </Box>
               </Box>
