@@ -1,9 +1,16 @@
 import React, { useState, useCallback, memo } from "react";
 import { LocationMarkerIcon } from "@heroicons/react/solid";
 import { Carousel } from "react-responsive-carousel";
-import { Box, Card, CardMedia, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { Favorite as FavoriteIcon } from "@mui/icons-material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import dummy from "../../assets/demo.jpg";
 import { useSelector } from "react-redux";
 
@@ -11,6 +18,7 @@ const AvailableRoom = memo(({ room }) => {
   const [liked, setLiked] = useState(false);
   const images = room.images.length > 0 ? room.images : [dummy] || [dummy];
   const searchType = useSelector((state) => state.search.searchType);
+  const navigate = useNavigate();
 
   const handleClick = useCallback(() => {
     setLiked((prevState) => !prevState);
@@ -70,59 +78,25 @@ const AvailableRoom = memo(({ room }) => {
         }}
       >
         <Box sx={{ flex: 1 }}>
-          <RouterLink
-            to={
-              searchType === "property"
-                ? `/rooms/view-room/${room.id}`
-                : `/roommate/view-roommate/${room.id}`
-            }
-            sx={{ textDecoration: "none" }}
-          >
-            {!room.action && <Typography variant="h6">{room.type}</Typography>}
-          </RouterLink>
-          <RouterLink
-            to={
-              searchType === "property"
-                ? `/rooms/view-room/${room.id}`
-                : `/roommate/view-roommate/${room.id}`
-            }
-            sx={{ textDecoration: "none" }}
-          >
-            {room.action && (
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                {room.poster?.firstName} {room.poster?.lastName},{" "}
-                {room?.aboutYou?.age || "Unknown age"}
-              </Typography>
-            )}
-          </RouterLink>
-          <RouterLink
-            to={
-              searchType === "property"
-                ? `/rooms/view-room/${room.id}`
-                : `/roommate/view-roommate/${room.id}`
-            }
-            sx={{ textDecoration: "none" }}
-          >
-            {!room.action && (
-              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                AED {room.monthlyPrice * 12} / year
-              </Typography>
-            )}
-          </RouterLink>
-          <RouterLink
-            to={
-              searchType === "property"
-                ? `/rooms/view-room/${room.id}`
-                : `/roommate/view-roommate/${room.id}`
-            }
-            sx={{ textDecoration: "none" }}
-          >
-            {room.action && (
-              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                ${room.budget} / month
-              </Typography>
-            )}
-          </RouterLink>
+          {!room.action && <Typography variant="h6">{room.type}</Typography>}
+
+          {room.action && (
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+              {room.poster?.firstName} {room.poster?.lastName},{" "}
+              {room?.aboutYou?.age || "Unknown age"}
+            </Typography>
+          )}
+
+          {!room.action && (
+            <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+              AED {room.monthlyPrice * 12} / year
+            </Typography>
+          )}
+          {room.action && (
+            <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+              ${room.budget} / month
+            </Typography>
+          )}
         </Box>
         <Box sx={{ flex: 1 }}>
           <Typography variant="body2" sx={{ mb: 1 }}>
@@ -136,6 +110,24 @@ const AvailableRoom = memo(({ room }) => {
             {room.address.appartmentNumber} {room.address.buildingName}{" "}
             {room.address.city} {room.address.location}
           </Typography>
+        </Box>
+        <Box>
+          <Button
+            variant="contained"
+            onClick={() =>
+              searchType === "property"
+                ? navigate(`/rooms/view-room/${room.id}`)
+                : navigate(`/roommate/view-roommate/${room.id}`)
+            }
+            style={{
+              backgroundColor: "orange",
+              color: "white",
+              borderRadius: "15px",
+              fontWeight: "700",
+            }}
+          >
+            All details
+          </Button>
         </Box>
       </Box>
     </Card>

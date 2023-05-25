@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import DummyImage from "../assets/demo.jpg";
 import { useNavigate } from "react-router-dom";
+import { ButtonStyle } from "../utils/ButtonStyle";
 
 const MyAds = () => {
   const type = JSON.parse(Cookies.get("user")).type;
@@ -105,6 +106,12 @@ const MyAds = () => {
                   </Grid>
                   <Button
                     variant="contained"
+                    style={{
+                      backgroundColor: "orange",
+                      color: "white",
+                      borderRadius: "15px",
+                      fontWeight: "700",
+                    }}
                     sx={{ borderRadius: "15px" }}
                     onClick={() => navigate(`/rooms/view-room/${myAd.id}`)}
                   >
@@ -168,6 +175,12 @@ const MyAds = () => {
                   <Grid>
                     <Button
                       variant={"contained"}
+                      style={{
+                        backgroundColor: "orange",
+                        color: "white",
+                        borderRadius: "15px",
+                        fontWeight: "700",
+                      }}
                       onClick={() =>
                         navigate(`/roommate/view-roommate/${myAd.id}`)
                       }

@@ -46,6 +46,8 @@ const ViewRoom = () => {
     getPartitionRoomData();
   }, []);
 
+  console.log(room);
+
   return (
     <Grid sx={{ overFlowX: "hidden" }}>
       <TopBackground />

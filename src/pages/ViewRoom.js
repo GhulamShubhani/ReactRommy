@@ -249,19 +249,23 @@ const ViewRoom = () => {
               <Typography variant="body1" sx={{ mb: 1 }}>
                 People
               </Typography>
-              <Typography>{room?.socialPreferences?.numberOfPeople}</Typography>
+              <Typography sx={{ fontWeight: "700" }}>
+                {room?.socialPreferences?.numberOfPeople}
+              </Typography>
             </Grid>
             <Grid item xs={4}>
               <Typography variant="body1" sx={{ mb: 1 }}>
                 Nationality
               </Typography>
-              <Typography>{room?.socialPreferences?.nationality}</Typography>
+              <Typography sx={{ fontWeight: "700" }}>
+                {room?.socialPreferences?.nationality}
+              </Typography>
             </Grid>
             <Grid item xs={4}>
               <Typography variant="body1" sx={{ mb: 1 }}>
                 Smoking
               </Typography>
-              <Typography>
+              <Typography sx={{ fontWeight: "700" }}>
                 {room?.socialPreferences?.smoking ? "Yes" : "No"}
               </Typography>
             </Grid>
@@ -269,13 +273,15 @@ const ViewRoom = () => {
               <Typography variant="body1" sx={{ mb: 1 }}>
                 Gender
               </Typography>
-              <Typography>{room?.socialPreferences?.gender}</Typography>
+              <Typography sx={{ fontWeight: "700" }}>
+                {room?.socialPreferences?.gender}
+              </Typography>
             </Grid>
             <Grid item xs={4}>
               <Typography variant="body1" sx={{ mb: 1 }}>
                 Drinking:
               </Typography>
-              <Typography>
+              <Typography sx={{ fontWeight: "700" }}>
                 {room?.socialPreferences?.drinking ? "Yes" : "No"}
               </Typography>
             </Grid>
@@ -283,7 +289,7 @@ const ViewRoom = () => {
               <Typography variant="body1" sx={{ mb: 1 }}>
                 Visitors
               </Typography>
-              <Typography>
+              <Typography sx={{ fontWeight: "700" }}>
                 {room?.socialPreferences?.visitors ? "Yes" : "No"}
               </Typography>
             </Grid>
@@ -347,7 +353,7 @@ const ViewRoom = () => {
               <Typography>
                 {room?.deposit && room?.depositPrice
                   ? `${room?.depositPrice} AED`
-                  : "0 AED"}
+                  : "N/A"}
               </Typography>
             </Grid>
           </Grid>
