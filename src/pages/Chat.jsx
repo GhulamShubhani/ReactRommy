@@ -28,6 +28,7 @@ const Chat = () => {
         { headers: { Authorization: token } }
       );
       setConversations(data);
+      
     } catch (err) {
       console.log(err);
     }

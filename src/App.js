@@ -60,31 +60,14 @@ const App = () => {
     alert("You denied for the notification")
    }
   }
-// if(!localStorage.getItem("token")){
+
   
-// }
   useEffect(() => {
    notificationpremision()
    
   }, [])
 
-//   onMessageListener()
-//     .then((payload) => {
-//       // console.log(payload, "payload");
-//       setShow(true);
-//       setNotification({
-//         title: payload.notification.title,
-//         body: payload.notification.body,
-//       });
-//       <Alert severity="success" color="info">
-  
-// </Alert>
-//     })
-//     .catch((err) => console.log("failed: ", err));
-    
-    // console.log("notification", notification);
-    
-  
+
   return (
     <Router>
       <div>
