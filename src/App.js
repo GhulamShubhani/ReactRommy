@@ -44,7 +44,7 @@ const App = () => {
        vapidKey:
        "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
       });
-      // console.log("tojen", token);
+      console.log("tojen", token);
   // console.log("tojen", permission);
    }
    else if(permission==="denied"){
