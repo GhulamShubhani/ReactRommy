@@ -23,7 +23,7 @@ const initialState = {
   yourLifeStyle: null,
 
   gender: "Male",
-  lifeStyle: null,
+  lifeStyle: "Early Brird",
   grouping: "Single",
   nationality: "Arab",
   numberOfPeople: null,
@@ -156,7 +156,7 @@ const TenantSlice = createSlice({
       state.yourLifeStyle = null;
 
       state.gender = "Male";
-      state.lifeStyle = null;
+      state.lifeStyle = "Early Brird";
       state.grouping = "Single";
       state.nationality = "Arab";
       state.numberOfPeople = null;

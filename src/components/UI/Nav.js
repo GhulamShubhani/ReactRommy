@@ -381,16 +381,24 @@ const Nav = () => {
                   mb: 2,
                 }}
               >
-                <Avatar
-                  alt={`${user?.firstName} avatar`}
-                  src={`${user?.profilePicture}`}
-                  sx={{
-                    width: 50,
-                    height: 50,
-                    mb: 1,
-                    border: "2px solid purple",
-                  }}
-                />
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0, width: "50px" }}
+                >
+                  <Avatar
+                    alt={`${user?.firstName} ${user?.lastName}`}
+                    src={`${user?.profilePicture}`}
+                    sx={{
+                      width: 50,
+                      height: 50,
+                      mb: 1,
+                      border: "2px solid purple",
+                    }}
+                  >
+                    {user?.firstName?.charAt(0)}
+                    {user?.lastName?.charAt(0)}
+                  </Avatar>
+                </IconButton>
                 <Typography sx={{ fontWeight: "700" }}>
                   {user?.firstName} {user?.lastName}
                 </Typography>

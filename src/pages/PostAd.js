@@ -164,16 +164,20 @@ const PostAd = () => {
       }
     } catch (err) {
       console.log(err);
+      toast.error("Please try again after some time", toastOptions);
     }
   };
 
   const handleValidations = () => {
-    const numberRegex = /^\d$/;
     if (!budget) {
       toast.error("Please enter budget", toastOptions);
       return false;
     }
-    if (!numberRegex.test(budget)) {
+
+    if (!/^\d+$/.test(budget)) {
+      console.log(budget);
+      console.log(/^\d+$/.test("210aa0"));
+      console.log("failed");
       toast.error("Budget must be a number", toastOptions);
       return false;
     }
@@ -587,7 +591,7 @@ const PostAd = () => {
               <InputDropDown
                 label="Lifestyle"
                 name="lifeStyle"
-                values={["Early Bird", "Night Owl"]}
+                values={["Early Brird", "Night Owl"]}
                 value={lifeStyle}
                 sx={{ width: "100%" }}
               />
