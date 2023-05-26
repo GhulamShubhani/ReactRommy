@@ -96,7 +96,6 @@ const Login = () => {
         const { data } = loginResponse;
         Cookies.set("user", JSON.stringify(data), { expires: 365 });
         localStorage.setItem("token", `bearer ${response.data.token}`);
-        const tokenExpirationTime = Date.now() + response.data.expireAt * 1000;
         const expirationTimestamp = Date.parse(response.data.expireAt);
         localStorage.setItem("tokenExpiration", expirationTimestamp);
 
