@@ -28,6 +28,10 @@ const Chat = () => {
         { headers: { Authorization: token } }
       );
       setConversations(data);
+<<<<<<< HEAD
+=======
+      console.log("data", data);
+>>>>>>> 98a2fa2d16a8738046409f83e82730f04311aa68
     } catch (err) {
       console.log(err);
     }

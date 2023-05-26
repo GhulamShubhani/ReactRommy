@@ -31,6 +31,7 @@ const PostProperty = () => {
   const dispatch = useDispatch();
   const [locationdata, setlocationdata] = useState([]);
   const token = localStorage.getItem("token");
+  const DeviceToken = localStorage.getItem("DeviceToken");
 
   const {
     edit,
