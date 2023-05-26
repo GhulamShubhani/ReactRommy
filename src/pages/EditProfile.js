@@ -66,35 +66,43 @@ const EditProfile = () => {
   };
 
   const handleUpdateProfile = async () => {
-    const obj = { firstName, lastName, email, gender, country, fcmToken };
-    if (verified) {
-      const confirmed = window.confirm(
-        "Are you sure you want to save the changes?"
-      );
-      if (confirmed) {
-        await axios.put(
-          "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/credentials",
-          obj,
-          { headers: { Authorization: token } }
+    try {
+      const obj = { firstName, lastName, email, gender, country, fcmToken };
+      if (verified) {
+        const confirmed = window.confirm(
+          "Are you sure you want to save the changes?"
         );
-        setVerified(true);
-        toastSuccess("Info updated successfully");
+        if (confirmed) {
+          await axios.put(
+            "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/credentials",
+            obj,
+            { headers: { Authorization: token } }
+          );
+          setVerified(true);
+          toastSuccess("Info updated successfully");
+        }
+      } else if (!emailVerified) {
+        toastError("Please verify your email");
+      } else {
+        toastError("Something went wrong");
       }
-    } else if (!emailVerified) {
-      toastError("Please verify your email");
-    } else {
-      toastError("Something went wrong");
+    } catch (err) {
+      console.log(err);
     }
   };
 
   const sendOtpHandler = async () => {
-    const { data } = await axios.post(
-      "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/send-email-verification-code",
-      { email },
-      { headers: { Authorization: token } }
-    );
-    setOtp(true);
-    setSendedOtp(data.code);
+    try {
+      const { data } = await axios.post(
+        "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/send-email-verification-code",
+        { email },
+        { headers: { Authorization: token } }
+      );
+      setOtp(true);
+      setSendedOtp(data.code);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const verifyOtpHandler = () => {

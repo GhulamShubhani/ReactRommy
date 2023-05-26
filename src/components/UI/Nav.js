@@ -89,11 +89,15 @@ const Nav = () => {
   };
 
   const getUserFromCookies = () => {
-    const user = Cookies.get("user");
-    if (token && Date.now() < parseInt(tokenExpiration) && user) {
-      return JSON.parse(user);
+    try {
+      const user = Cookies.get("user");
+      if (token && Date.now() < parseInt(tokenExpiration) && user) {
+        return JSON.parse(user);
+      }
+      return null;
+    } catch (err) {
+      console.log(err);
     }
-    return null;
   };
 
   useEffect(() => {

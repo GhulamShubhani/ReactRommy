@@ -34,40 +34,44 @@ const AdvancedSearch = () => {
   };
 
   const advanceSearchHandler = async () => {
-    const obj = { countryCode: "AE" };
+    try {
+      const obj = { countryCode: "AE" };
 
-    if (type) {
-      obj.type = type[0];
-    }
-    // if (minBudget) {
-    //   obj.minBudget = minBudget;
-    // }
-    // if (maxBudget) {
-    //   obj.maxBudget = maxBudget;
-    // }
-    // if (amenities) {
-    //   obj.amenities = amenities;
-    // }
-    // if (preferences) {
-    //   obj.preferences = preferences;
-    // }
-    if (gender) {
-      obj.gender = gender;
-    }
-    // if (preferredRentType) {
-    //   obj.preferredRentType = preferredRentType;
-    // }
+      if (type) {
+        obj.type = type[0];
+      }
+      // if (minBudget) {
+      //   obj.minBudget = minBudget;
+      // }
+      // if (maxBudget) {
+      //   obj.maxBudget = maxBudget;
+      // }
+      // if (amenities) {
+      //   obj.amenities = amenities;
+      // }
+      // if (preferences) {
+      //   obj.preferences = preferences;
+      // }
+      if (gender) {
+        obj.gender = gender;
+      }
+      // if (preferredRentType) {
+      //   obj.preferredRentType = preferredRentType;
+      // }
 
-    if (Object.keys(obj).length > 0) {
-      const { data } = await axios.post(
-        `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/${searchType}-ad/available`,
-        obj
-      );
-      console.log(data);
-      dispatch(SearchActions.availableRooms(data));
-      navigate("/sp");
-    } else {
-      console.log("obj is empty");
+      if (Object.keys(obj).length > 0) {
+        const { data } = await axios.post(
+          `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/${searchType}-ad/available`,
+          obj
+        );
+        console.log(data);
+        dispatch(SearchActions.availableRooms(data));
+        navigate("/sp");
+      } else {
+        console.log("obj is empty");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 

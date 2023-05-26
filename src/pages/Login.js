@@ -91,7 +91,7 @@ const Login = () => {
           { email, password, fcmToken: "123" }
         );
 
-        console.log(response);
+        console.log(loginResponse);
 
         const { data } = loginResponse;
         Cookies.set("user", JSON.stringify(data), { expires: 365 });

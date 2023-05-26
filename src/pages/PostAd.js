@@ -226,7 +226,7 @@ const PostAd = () => {
       container
       spacing={2}
       p={3}
-      maxWidth={"650px"}
+      maxWidth={"700px"}
       margin={"auto"}
       justifyContent="center"
     >

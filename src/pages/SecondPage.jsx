@@ -69,6 +69,8 @@ const SecondPage = () => {
     }
   }, []);
 
+  console.log(availableRooms);
+
   const viewArrayData = () => {
     if (city === "Dubai") {
       setLocationData(dubaiCities);
@@ -128,7 +130,11 @@ const SecondPage = () => {
             xs={12}
             sm={4}
             md={3}
-            sx={{ backgroundColor: "#99f099", width: "100%" }}
+            sx={{
+              backgroundColor: "#99f099",
+              width: "100%",
+              display: { xs: "none", sm: "block", md: "block" },
+            }}
           >
             <AdvancedSearch />
           </Grid>

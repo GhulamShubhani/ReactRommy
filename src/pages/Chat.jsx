@@ -28,19 +28,22 @@ const Chat = () => {
         { headers: { Authorization: token } }
       );
       setConversations(data);
-      
     } catch (err) {
       console.log(err);
     }
   };
 
   const getConversationMessages = async (conversation) => {
-    const { data } = await axios.get(
-      `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/messages/?otherId=${conversation.otherId}`,
-      { headers: { Authorization: token } }
-    );
-    setMessages(data);
-    setUser(conversation);
+    try {
+      const { data } = await axios.get(
+        `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/messages/?otherId=${conversation.otherId}`,
+        { headers: { Authorization: token } }
+      );
+      setMessages(data);
+      setUser(conversation);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const sendMessage = async (newMessage) => {

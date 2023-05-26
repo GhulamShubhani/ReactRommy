@@ -20,10 +20,16 @@ import TopBackground from "../components/postPropertyComponents/TopBackground";
 import BottomBackground from "../components/postPropertyComponents/BottomBackground";
 import DummyMaleUserImage from "../assets/dummyUserImage.jpg";
 import DummyFemaleUserImage from "../assets/dummyFemaleUserImage.jpg";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { toast, ToastContainer } from "react-toastify";
+import { toastOptions } from "../utils/ToastOptions";
 
 const ViewRoom = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const token = localStorage.getItem("token");
+  const urlParams = new URLSearchParams(window.location.search);
+  const active = urlParams.get("active");
   let user = Cookies.get("user");
   if (user) {
     user = JSON.parse(user);
@@ -33,18 +39,37 @@ const ViewRoom = () => {
   const [room, setRoom] = useState(rooms.find((room) => room.id === id));
 
   const getPartitionRoomData = async () => {
-    const { data } = await axios.post(
-      "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad/available",
-      { countryCode: "AE" }
-    );
-    dispatch(SearchActions.availableRooms(data));
+    try {
+      const { data } = await axios.post(
+        "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad/available",
+        { countryCode: "AE" }
+      );
+      dispatch(SearchActions.availableRooms(data));
 
-    setRoom(data.find((room) => room.id === id));
+      setRoom(data.find((room) => room.id === id));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     getPartitionRoomData();
   }, []);
+
+  const handleDeleteAd = async (adId) => {
+    try {
+      const confirmed = window.confirm("please confirm");
+      if (confirmed) {
+        await axios.delete(
+          `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad/${adId}`,
+          { headers: { Authorization: token } }
+        );
+        toast.success("Ad deleted successfully", toastOptions);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   console.log(room);
 
@@ -68,8 +93,24 @@ const ViewRoom = () => {
             flexDirection: { xs: "column", sm: "row" },
             alignItems: "center",
             mb: 3,
+            position: "relative",
           }}
         >
+          {active && (
+            <Button
+              style={{
+                color: "slategray",
+                position: "absolute",
+                top: "10px",
+                right: "20px",
+                zIndex: 1,
+              }}
+              sx={{ borderRadius: "15px" }}
+              onClick={() => handleDeleteAd(room._id)}
+            >
+              <DeleteIcon />
+            </Button>
+          )}
           {room && (
             <Box
               sx={{
@@ -389,6 +430,7 @@ const ViewRoom = () => {
         </Box>
       </Box>
       <BottomBackground />
+      <ToastContainer />
     </Grid>
   );
 };

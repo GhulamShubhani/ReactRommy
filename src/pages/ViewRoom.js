@@ -22,10 +22,13 @@ import { toastOptions } from "../utils/ToastOptions";
 import { SearchActions } from "../store/Search";
 import TopBackground from "../components/postPropertyComponents/TopBackground";
 import BottomBackground from "../components/postPropertyComponents/BottomBackground";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const ViewRoom = () => {
   const token = localStorage.getItem("token");
   const tokenExpiration = localStorage.getItem("tokenExpiration");
+  const urlParams = new URLSearchParams(window.location.search);
+  const active = urlParams.get("active");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -65,13 +68,32 @@ const ViewRoom = () => {
   }
 
   const getPartitionRoomData = async () => {
-    const { data } = await axios.post(
-      "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/property-ad/available",
-      { countryCode: "AE" }
-    );
-    dispatch(SearchActions.availableRooms(data));
+    try {
+      const { data } = await axios.post(
+        "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/property-ad/available",
+        { countryCode: "AE" }
+      );
+      dispatch(SearchActions.availableRooms(data));
 
-    setRoom(data.find((room) => room.id === id));
+      setRoom(data.find((room) => room.id === id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDeleteAd = async (adId) => {
+    try {
+      const confirmed = window.confirm("please confirm");
+      if (confirmed) {
+        await axios.delete(
+          `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/property-ad/${adId}`,
+          { headers: { Authorization: token } }
+        );
+        toast.success("Ad deleted successfully", toastOptions);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleBookRoom = async () => {
@@ -139,8 +161,24 @@ const ViewRoom = () => {
             flexDirection: { xs: "column", sm: "row" },
             alignItems: "center",
             mb: 3,
+            position: "relative",
           }}
         >
+          {active && (
+            <Button
+              style={{
+                color: "slategray",
+                position: "absolute",
+                top: "10px",
+                right: "20px",
+                zIndex: 1,
+              }}
+              sx={{ borderRadius: "15px" }}
+              onClick={() => handleDeleteAd(room._id)}
+            >
+              <DeleteIcon />
+            </Button>
+          )}
           {room && (
             <Box
               sx={{

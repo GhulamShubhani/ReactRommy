@@ -12,7 +12,6 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import DummyImage from "../assets/demo.jpg";
 import { useNavigate } from "react-router-dom";
-import { ButtonStyle } from "../utils/ButtonStyle";
 
 const MyAds = () => {
   const type = JSON.parse(Cookies.get("user")).type;
@@ -22,18 +21,22 @@ const MyAds = () => {
   const navigate = useNavigate();
 
   const fetchMyAds = async () => {
-    setIsLoading(true);
-    const searchType = type === "landlord" ? "property" : "roommate";
     try {
-      const { data } = await axios.get(
-        `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/${searchType}-ad/my-ads`,
-        { headers: { Authorization: token } }
-      );
-      setMyAds(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
+      setIsLoading(true);
+      const searchType = type === "landlord" ? "property" : "roommate";
+      try {
+        const { data } = await axios.get(
+          `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/${searchType}-ad/my-ads`,
+          { headers: { Authorization: token } }
+        );
+        setMyAds(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -60,6 +63,7 @@ const MyAds = () => {
                   backgroundColor: "#f5f5f5",
                   border: "1px solid #ccc",
                   borderRadius: "10px",
+                  position: "relative",
                 }}
               >
                 <CardMedia
@@ -113,7 +117,9 @@ const MyAds = () => {
                       fontWeight: "700",
                     }}
                     sx={{ borderRadius: "15px" }}
-                    onClick={() => navigate(`/rooms/view-room/${myAd.id}`)}
+                    onClick={() =>
+                      navigate(`/rooms/view-room/${myAd.id}/?active=true`)
+                    }
                   >
                     All Details
                   </Button>
@@ -182,7 +188,9 @@ const MyAds = () => {
                         fontWeight: "700",
                       }}
                       onClick={() =>
-                        navigate(`/roommate/view-roommate/${myAd.id}`)
+                        navigate(
+                          `/roommate/view-roommate/${myAd.id}/?active=true`
+                        )
                       }
                     >
                       View Ad

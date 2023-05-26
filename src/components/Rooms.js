@@ -13,29 +13,37 @@ const Rooms = () => {
   const activeLink = useSelector((state) => state.room.roomsType);
 
   const handleProperty = async () => {
-    const { data } = await axios.post(
-      `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/property-ad/available`,
-      { countryCode: "AE" }
-    );
-    dispatch(roomsTypeActions.availableRooms(data));
-    dispatch(roomsTypeActions.roommateAds());
+    try {
+      const { data } = await axios.post(
+        `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/property-ad/available`,
+        { countryCode: "AE" }
+      );
+      dispatch(roomsTypeActions.availableRooms(data));
+      dispatch(roomsTypeActions.roommateAds());
 
-    dispatch(SearchActions.availableRooms(data));
-    dispatch(SearchActions.roomSearch("property"));
-    navigate("/sp");
+      dispatch(SearchActions.availableRooms(data));
+      dispatch(SearchActions.roomSearch("property"));
+      navigate("/sp");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleRoomMate = async () => {
-    const { data } = await axios.post(
-      `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad/available`,
-      { countryCode: "AE" }
-    );
-    dispatch(roomsTypeActions.availableRooms(data));
-    dispatch(roomsTypeActions.propertyAds());
-    dispatch(SearchActions.availableRooms(data));
-    dispatch(SearchActions.roomSearch("roommate"));
+    try {
+      const { data } = await axios.post(
+        `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad/available`,
+        { countryCode: "AE" }
+      );
+      dispatch(roomsTypeActions.availableRooms(data));
+      dispatch(roomsTypeActions.propertyAds());
+      dispatch(SearchActions.availableRooms(data));
+      dispatch(SearchActions.roomSearch("roommate"));
 
-    navigate("/sp");
+      navigate("/sp");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

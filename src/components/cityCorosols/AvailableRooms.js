@@ -22,13 +22,17 @@ const AvailableRooms = () => {
   };
 
   const fetchAvailableRooms = async () => {
-    const { data } = await axios.get(
-      "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/recomended?countryCode=AE"
-    );
-    if (roomType === "propertyAds") {
-      dispatch(roomsTypeActions.availableRooms(data.propertyAds));
-    } else {
-      dispatch(roomsTypeActions.availableRooms(data.roommateAds));
+    try {
+      const { data } = await axios.get(
+        "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/recomended?countryCode=AE"
+      );
+      if (roomType === "propertyAds") {
+        dispatch(roomsTypeActions.availableRooms(data.propertyAds));
+      } else {
+        dispatch(roomsTypeActions.availableRooms(data.roommateAds));
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
