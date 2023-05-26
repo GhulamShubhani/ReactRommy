@@ -11,6 +11,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import firebase, { messaging, onMessageListener } from "../firebase/index";
+import axios from "axios";
 
 const MyAccount = () => {
   const user = JSON.parse(Cookies.get("user"));
@@ -38,6 +39,23 @@ const MyAccount = () => {
   const testNotification = ()=>{
 
   }
+  const sendnoti = async() => {
+     const noti = await axios.post(
+        "https://fcm.googleapis.com/fcm/send",
+        {
+          to: "f8BytJHQr5Jx74gcDp8F3O:APA91bHEOisinu3b9gSwnKWqRAuCbuqXRO8KbmOC_gpriOTcu91o0jHA_lxIpgUCxQBKz5H4irjBHaXd-ejBhS9_IOo-443prvCxiUlr5pH8XvOcPALPFb7GVFzNUpjfGoFJuJakEaV-",
+          notification: {
+            title: "Add property",
+            body: "You add new property",
+          },
+        },
+        {
+          headers: { Authorization: "key=AAAAfyPvrw8:APA91bGidy7FBBsYJjDhWYvptDNAFHmHDyJGgfFm9qs3DS5VdwxG4aQT7Y5cGF-dddSF5v6O5tYLGY48Hz8Q2lyimjt8TIKGRpLoZF7lng0Xe6LluMGGnTzBYUA1ktjpSQgpJVQGYz2o",
+                    "Content-Type": "application/json" 
+                  },
+        }
+      );
+  };
 
   return (
     <>
@@ -239,7 +257,7 @@ const MyAccount = () => {
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography>About</Typography>
+                  <Typography onClick={sendnoti}>About</Typography>
                 </Box>
               </Box>
               <Box>

@@ -46,6 +46,7 @@ const App = () => {
        "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
       });
       console.log("tojen", token1);
+      localStorage.setItem("DeviceToken", token1);
       const res = await axios.put(
         "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/update-fcm-token",
         {
