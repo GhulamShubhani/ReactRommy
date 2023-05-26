@@ -21,6 +21,7 @@ const Rooms = () => {
     dispatch(roomsTypeActions.roommateAds());
 
     dispatch(SearchActions.availableRooms(data));
+    dispatch(SearchActions.roomSearch("property"));
     navigate("/sp");
   };
 
@@ -32,6 +33,8 @@ const Rooms = () => {
     dispatch(roomsTypeActions.availableRooms(data));
     dispatch(roomsTypeActions.propertyAds());
     dispatch(SearchActions.availableRooms(data));
+    dispatch(SearchActions.roomSearch("roommate"));
+
     navigate("/sp");
   };
 
