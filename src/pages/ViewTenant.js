@@ -227,7 +227,7 @@ const ViewRoom = () => {
                 <Box>
                   {!active && <Button variant="contained">Chat</Button>}
                   <Typography sx={{ mt: 1, fontWeight: 700 }}>
-                    {room?.budget} AED Budget
+                    {room?.budget.toLocaleString()} AED Budget
                   </Typography>
                 </Box>
               </Box>

@@ -436,7 +436,7 @@ const AboutBooking = () => {
                 spacing={2}
                 sx={{ justifyContent: "center", mt: 5 }}
               >
-                <Button variant="contained">Chat with Client</Button>
+                <Button variant="contained">Chat with landlord</Button>
               </Grid>
             )}
             {type === "landlord" && property?.isPayed && (
@@ -445,7 +445,7 @@ const AboutBooking = () => {
                 spacing={2}
                 sx={{ justifyContent: "center", mt: 5 }}
               >
-                <Button variant="contained">Chat with Tenant</Button>
+                <Button variant="contained">Chat with Client</Button>
               </Grid>
             )}
 

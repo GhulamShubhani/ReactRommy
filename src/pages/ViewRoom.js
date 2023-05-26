@@ -274,7 +274,11 @@ const ViewRoom = () => {
                     {room?.address?.city}
                   </Typography>
                   <Typography sx={{ mt: 1, fontWeight: 700 }}>
-                    {room?.monthlyPrice + 0.1 * room?.monthlyPrice} AED / Month
+                    {(
+                      room?.monthlyPrice +
+                      0.1 * room?.monthlyPrice
+                    ).toLocaleString()}{" "}
+                    AED / Month
                   </Typography>
                 </Box>
                 <Box
@@ -395,13 +399,19 @@ const ViewRoom = () => {
             </Grid>
             <Grid item xs={4}>
               <Typography>
-                {room?.monthlyPrice + 0.1 * room?.monthlyPrice} AED
+                {(
+                  room?.monthlyPrice +
+                  0.1 * room?.monthlyPrice
+                ).toLocaleString()}{" "}
+                AED
               </Typography>
               <Typography>
-                {room?.weeklyPrice + 0.1 * room?.weeklyPrice} AED
+                {(room?.weeklyPrice + 0.1 * room?.weeklyPrice).toLocaleString()}{" "}
+                AED
               </Typography>
               <Typography>
-                {room?.dailyPrice + 0.05 * room?.dailyPrice} AED
+                {(room?.dailyPrice + 0.05 * room?.dailyPrice).toLocaleString()}{" "}
+                AED
               </Typography>
             </Grid>
           </Grid>
@@ -417,7 +427,7 @@ const ViewRoom = () => {
             <Grid item xs={4}>
               <Typography>
                 {room?.deposit && room?.depositPrice
-                  ? `${room?.depositPrice} AED`
+                  ? `${room?.depositPrice.toLocaleString()} AED`
                   : "N/A"}
               </Typography>
             </Grid>

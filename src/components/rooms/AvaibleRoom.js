@@ -89,12 +89,13 @@ const AvailableRoom = memo(({ room }) => {
 
           {!room.action && (
             <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-              AED {room.monthlyPrice * 12} / year
+              {room.monthlyPrice.toLocaleString()}{" "}
+              <span style={{ fontSize: "0.8em" }}>AED</span> / Month
             </Typography>
           )}
           {room.action && (
             <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-              ${room.budget} / month
+              budget AED {room.budget.toLocaleString()}
             </Typography>
           )}
         </Box>
