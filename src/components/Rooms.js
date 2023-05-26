@@ -3,10 +3,13 @@ import RoomBuilding from "../assets/roomBuilding.png";
 import RoomWomen from "../assets/roomWomen.png";
 import { useDispatch, useSelector } from "react-redux";
 import { roomsTypeActions } from "../store/Rooms";
+import { SearchActions } from "../store/Search";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Rooms = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const activeLink = useSelector((state) => state.room.roomsType);
 
   const handleProperty = async () => {
@@ -16,6 +19,10 @@ const Rooms = () => {
     );
     dispatch(roomsTypeActions.availableRooms(data));
     dispatch(roomsTypeActions.roommateAds());
+
+    dispatch(SearchActions.availableRooms(data));
+    dispatch(SearchActions.roomSearch("property"));
+    navigate("/sp");
   };
 
   const handleRoomMate = async () => {
@@ -25,6 +32,10 @@ const Rooms = () => {
     );
     dispatch(roomsTypeActions.availableRooms(data));
     dispatch(roomsTypeActions.propertyAds());
+    dispatch(SearchActions.availableRooms(data));
+    dispatch(SearchActions.roomSearch("roommate"));
+
+    navigate("/sp");
   };
 
   return (

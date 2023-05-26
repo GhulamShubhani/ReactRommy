@@ -96,6 +96,8 @@ const SecondPage = () => {
     viewArrayData();
   }, [city]);
 
+  console.log(availableRooms);
+
   return (
     <>
       <Box

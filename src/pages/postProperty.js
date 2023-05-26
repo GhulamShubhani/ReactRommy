@@ -71,70 +71,66 @@ const PostProperty = () => {
   } = useSelector((state) => state.property);
 
   const postProductHandler = async () => {
-    if (validatioHandler()) {
-      const address = {
-        city,
-        location,
-        buildingName,
-        appartmentNumber,
-        floorNumber,
-      };
+    try {
+      if (validatioHandler()) {
+        const address = {
+          countryCode: "AE",
+          city,
+          location,
+          buildingName,
+          appartmentNumber,
+          floorNumber,
+        };
 
-      const agentInfo = {
-        firstName,
-        lastName,
-        email,
-        phone,
-      };
+        const agentInfo = {
+          firstName,
+          lastName,
+          email,
+          phone,
+        };
 
-      const socialPreferences = {
-        numberOfPeople,
-        gender,
-        nationality,
-        smoking,
-        drinking,
-        visitors,
-      };
-      const obj = {
-        type,
-        amenities,
-        quantity: Number(quantity),
-        quantityTaken: Number(quantityTaken),
-        preferedRentType,
-        monthlyPrice: Number(monthlyPrice),
-        weeklyPrice: Number(weeklyPrice),
-        dailyPrice: Number(dailyPrice),
-        deposit,
-        images,
-        videos,
-        depositPrice: Number(depositPrice),
-        description,
-        posterType,
-        address,
-        agentInfo,
-        socialPreferences,
-      };
-      const { data } = await axios.post(
-        "https://gsccontrolpanelbackend.onrender.com/postProperty",
-        obj,
-        { headers: { Authorization: token } }
-      );
-      const noti = await axios.post(
-        "https://fcm.googleapis.com/fcm/send",
-        {
-          to: "f8BytJHQr5Jx74gcDp8F3O:APA91bHEOisinu3b9gSwnKWqRAuCbuqXRO8KbmOC_gpriOTcu91o0jHA_lxIpgUCxQBKz5H4irjBHaXd-ejBhS9_IOo-443prvCxiUlr5pH8XvOcPALPFb7GVFzNUpjfGoFJuJakEaV-",
-          notification: {
-            title: "Add property",
-            body: "You add new property",
-          },
-        },
-        {
-          headers: { Authorization: "key=AAAAfyPvrw8:APA91bGidy7FBBsYJjDhWYvptDNAFHmHDyJGgfFm9qs3DS5VdwxG4aQT7Y5cGF-dddSF5v6O5tYLGY48Hz8Q2lyimjt8TIKGRpLoZF7lng0Xe6LluMGGnTzBYUA1ktjpSQgpJVQGYz2o",
-                    "Content-Type": "application/json" 
-                  },
-        }
-      );
-      navigate("/");
+        const socialPreferences = {
+          numberOfPeople,
+          gender,
+          nationality,
+          smoking: smoking === "yes" ? true : false,
+          drinking: drinking === "yes" ? true : false,
+          visitors: visitors === "yes" ? true : false,
+          cooking: false,
+        };
+        const obj = {
+          type,
+          amenities,
+          quantity: Number(quantity),
+          preferedRentType,
+          monthlyPrice: Number(monthlyPrice),
+          weeklyPrice: Number(weeklyPrice),
+          dailyPrice: Number(dailyPrice),
+          deposit,
+          images,
+          videos,
+          depositPrice: Number(depositPrice),
+          description,
+          posterType,
+          address,
+          agentInfo,
+          socialPreferences,
+        };
+
+        console.log(obj);
+
+        const { data } = await axios.post(
+          "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/property-ad",
+          obj,
+          { headers: { Authorization: token } }
+        );
+        console.log(data);
+        toast.success("Property posted successfully", toastOptions);
+
+        //navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -149,7 +145,7 @@ const PostProperty = () => {
       return false;
     }
     if (!buildingName) {
-      toast.error("Building Name is required", toastOptions);
+      toast.error("Tower Name is required", toastOptions);
       return false;
     }
     if (!appartmentNumber) {

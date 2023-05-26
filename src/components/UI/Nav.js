@@ -32,7 +32,6 @@ const Nav = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [user, setUser] = useState({});
-  const [isUpdated, setIsUpdated] = useState(false);
   const settings = ["Edit Profile", "Home", "My Account", "Logout"];
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -120,7 +119,7 @@ const Nav = () => {
     };
 
     getUserData();
-  }, []);
+  }, [token]);
 
   return (
     <div className="nav-container p-3 flex justify-between bg-white">
@@ -278,9 +277,9 @@ const Nav = () => {
           }}
           onClick={() => handleClick("postProperty")}
           component={NavLink}
-          to={"/postProperty"}
+          to={user.type === "landlord" ? "/postProperty" : "/postAd"}
         >
-          Post Property
+          {user.type === "landlord" ? "Post Property" : "Post Ad"}
         </Button>
       </Stack>
       {!isLoggedIn ||
@@ -342,7 +341,7 @@ const Nav = () => {
               sx={{ p: 0, width: "50px" }}
             >
               <Avatar
-                alt={`${user?.firstName} avatar`}
+                alt={`${user?.firstName} ${user?.lastName}`}
                 src={`${user?.profilePicture}`}
                 sx={{
                   width: 50,
@@ -350,7 +349,10 @@ const Nav = () => {
                   mb: 1,
                   border: "2px solid purple",
                 }}
-              />
+              >
+                {user?.firstName?.charAt(0)}
+                {user?.lastName?.charAt(0)}
+              </Avatar>
             </IconButton>
           </Tooltip>
           <Menu
@@ -379,16 +381,24 @@ const Nav = () => {
                   mb: 2,
                 }}
               >
-                <Avatar
-                  alt={`${user?.firstName} avatar`}
-                  src={`${user?.profilePicture}`}
-                  sx={{
-                    width: 50,
-                    height: 50,
-                    mb: 1,
-                    border: "2px solid purple",
-                  }}
-                />
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0, width: "50px" }}
+                >
+                  <Avatar
+                    alt={`${user?.firstName} ${user?.lastName}`}
+                    src={`${user?.profilePicture}`}
+                    sx={{
+                      width: 50,
+                      height: 50,
+                      mb: 1,
+                      border: "2px solid purple",
+                    }}
+                  >
+                    {user?.firstName?.charAt(0)}
+                    {user?.lastName?.charAt(0)}
+                  </Avatar>
+                </IconButton>
                 <Typography sx={{ fontWeight: "700" }}>
                   {user?.firstName} {user?.lastName}
                 </Typography>

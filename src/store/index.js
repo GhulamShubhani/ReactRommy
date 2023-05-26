@@ -5,6 +5,7 @@ import AdvanceSearchReducer from "./AdvanceSearch";
 import PropertyReducer from "./Property";
 import userLogin from "./User";
 import Signup from "./Signup";
+import Tenant from "./Tenant";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     user: userLogin,
     advanceSearch: AdvanceSearchReducer,
     signup: Signup,
+    tenant: Tenant,
   },
 });
 
