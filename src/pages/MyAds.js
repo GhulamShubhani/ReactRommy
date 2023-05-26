@@ -40,8 +40,6 @@ const MyAds = () => {
     }
   };
 
-  console.log(myAds);
-
   const myAdsData =
     type === "landlord"
       ? myAds

@@ -37,9 +37,6 @@ const App = () => {
   const token = localStorage.getItem("token");
   const tokenExpiration = localStorage.getItem("tokenExpiration");
 
-  // const [show, setShow] = useState(false);
-  // const [notification, setNotification] = useState({ title: "", body: "" });
-
   const notificationpremision = async () => {
     try {
       if (token && Date.now() < parseInt(tokenExpiration)) {
@@ -49,7 +46,6 @@ const App = () => {
             vapidKey:
               "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
           });
-          console.log("tojen", token1);
           const res = await axios.put(
             "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/update-fcm-token",
             {
@@ -57,8 +53,6 @@ const App = () => {
             },
             { headers: { Authorization: token } }
           );
-          console.log("res-------", res);
-          // console.log("tojen", permission);
         } else if (permission === "denied") {
           alert("You denied for the notification");
         }
@@ -71,22 +65,6 @@ const App = () => {
   useEffect(() => {
     notificationpremision();
   }, []);
-
-  //   onMessageListener()
-  //     .then((payload) => {
-  //       // console.log(payload, "payload");
-  //       setShow(true);
-  //       setNotification({
-  //         title: payload.notification.title,
-  //         body: payload.notification.body,
-  //       });
-  //       <Alert severity="success" color="info">
-
-  // </Alert>
-  //     })
-  //     .catch((err) => console.log("failed: ", err));
-
-  // console.log("notification", notification);
 
   return (
     <Router>

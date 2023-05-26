@@ -18,7 +18,7 @@ const initialState = {
   yourAstrologicalSign: null,
   yourAge: null,
   yourGender: "Male",
-  yourOccupation: null,
+  yourOccupation: "Professional",
   yourLanguages: [],
   yourLifeStyle: null,
 
@@ -137,7 +137,7 @@ const TenantSlice = createSlice({
       state.type = "Studio";
       state.rentType = "Monthly";
       state.action = "HAVE ROOM";
-      state.budget = null;
+      state.budget = "";
       state.description = null;
       state.movingDate = null;
       state.images = [];
@@ -151,7 +151,7 @@ const TenantSlice = createSlice({
       state.yourAstrologicalSign = null;
       state.yourAge = null;
       state.yourGender = "Male";
-      state.yourOccupation = null;
+      state.yourOccupation = "Professional";
       state.yourLanguages = [];
       state.yourLifeStyle = null;
 

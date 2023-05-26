@@ -11,6 +11,10 @@ import {
   MenuItem,
   TextField,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import { toast, ToastContainer } from "react-toastify";
@@ -33,6 +37,7 @@ const ViewRoom = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [value, setValue] = useState("Monthly");
+  const [confirmed, setConfirmed] = useState(false);
   const [preferredRentType, setPreferredRentType] = useState("Monthly");
   let user = Cookies.get("user");
   if (user) {
@@ -82,15 +87,13 @@ const ViewRoom = () => {
   };
 
   const handleDeleteAd = async (adId) => {
+    console.log(adId);
     try {
-      const confirmed = window.confirm("please confirm");
-      if (confirmed) {
-        await axios.delete(
-          `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/property-ad/${adId}`,
-          { headers: { Authorization: token } }
-        );
-        toast.success("Ad deleted successfully", toastOptions);
-      }
+      await axios.delete(
+        `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/property-ad/${adId}`,
+        { headers: { Authorization: token } }
+      );
+      toast.success("Property deleted successfully", toastOptions);
     } catch (err) {
       console.log(err);
     }
@@ -174,11 +177,35 @@ const ViewRoom = () => {
                 zIndex: 1,
               }}
               sx={{ borderRadius: "15px" }}
-              onClick={() => handleDeleteAd(room._id)}
+              onClick={() => setConfirmed(true)}
             >
               <DeleteIcon />
             </Button>
           )}
+
+          {confirmed && (
+            <Dialog open={confirmed} onClose={() => setConfirmed(false)}>
+              <DialogTitle fontWeight={700}>
+                Confirm Property Deletion
+              </DialogTitle>
+              <DialogContent>
+                <Typography variant="body1">
+                  Please confirm for deleting this Property
+                </Typography>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => setConfirmed(false)}>Cancel</Button>
+                <Button
+                  onClick={() => handleDeleteAd(room.id)}
+                  color="error"
+                  variant="contained"
+                >
+                  Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
+          )}
+
           {room && (
             <Box
               sx={{

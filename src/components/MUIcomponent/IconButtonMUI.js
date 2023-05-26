@@ -14,6 +14,7 @@ export default function IconButtonMUI(props) {
   const location = useSelector((state) => state.search.location);
   const gender = useSelector((state) => state.search.gender);
   const rentType = useSelector((state) => state.search.PreferredRentType);
+  const action = useSelector((state) => state.search.action);
 
   const handleClick = async () => {
     try {
@@ -32,6 +33,9 @@ export default function IconButtonMUI(props) {
       }
       if (propertyType && propertyType !== "All") {
         obj.type = propertyType;
+      }
+      if (action && action !== "All") {
+        obj.action = action;
       }
       if (Object.keys(obj).length > 0) {
         const { data } = await axios.post(

@@ -10,6 +10,10 @@ import {
   CardMedia,
   Button,
   Avatar,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import axios from "axios";
@@ -30,6 +34,7 @@ const ViewRoom = () => {
   const token = localStorage.getItem("token");
   const urlParams = new URLSearchParams(window.location.search);
   const active = urlParams.get("active");
+  const [confirmed, setConfirmed] = useState(false);
   let user = Cookies.get("user");
   if (user) {
     user = JSON.parse(user);
@@ -58,20 +63,17 @@ const ViewRoom = () => {
 
   const handleDeleteAd = async (adId) => {
     try {
-      const confirmed = window.confirm("please confirm");
-      if (confirmed) {
-        await axios.delete(
-          `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad/${adId}`,
-          { headers: { Authorization: token } }
-        );
-        toast.success("Ad deleted successfully", toastOptions);
-      }
+      await axios.delete(
+        `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad/${adId}`,
+        { headers: { Authorization: token } }
+      );
+      toast.success("Ad deleted successfully", toastOptions);
     } catch (err) {
       console.log(err);
+    } finally {
+      setConfirmed(false);
     }
   };
-
-  console.log(room);
 
   return (
     <Grid sx={{ overFlowX: "hidden" }}>
@@ -106,11 +108,33 @@ const ViewRoom = () => {
                 zIndex: 1,
               }}
               sx={{ borderRadius: "15px" }}
-              onClick={() => handleDeleteAd(room._id)}
+              onClick={() => setConfirmed(true)}
             >
               <DeleteIcon />
             </Button>
           )}
+
+          {confirmed && (
+            <Dialog open={confirmed} onClose={() => setConfirmed(false)}>
+              <DialogTitle fontWeight={700}>Confirm AD Deletion</DialogTitle>
+              <DialogContent>
+                <Typography variant="body1">
+                  Please confirm for deleting this Ad
+                </Typography>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => setConfirmed(false)}>Cancel</Button>
+                <Button
+                  onClick={() => handleDeleteAd(room.id)}
+                  color="error"
+                  variant="contained"
+                >
+                  Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
+          )}
+
           {room && (
             <Box
               sx={{
@@ -201,7 +225,7 @@ const ViewRoom = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  <Button variant="contained">Chat</Button>
+                  {!active && <Button variant="contained">Chat</Button>}
                   <Typography sx={{ mt: 1, fontWeight: 700 }}>
                     {room?.budget} AED Budget
                   </Typography>
@@ -313,7 +337,9 @@ const ViewRoom = () => {
                 Lifestyles:
               </Typography>
               <Typography sx={{ fontWeight: "600" }}>
-                {room?.socialPreferences?.lifeStyle}
+                {room?.socialPreferences?.lifeStyle
+                  ? room?.socialPreferences?.lifeStyle
+                  : "N/A"}
               </Typography>
             </Grid>
           </Grid>

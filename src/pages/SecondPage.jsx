@@ -31,6 +31,7 @@ const SecondPage = () => {
   const searchText = useSelector((state) => state.search.searchText);
   const availableRooms = useSelector((state) => state.search.availableRooms);
   const searchType = useSelector((state) => state.search.searchType);
+  const action = useSelector((state) => state.search.action);
   const dispatch = useDispatch();
   const [locationData, setLocationData] = useState([]);
   const token = localStorage.getItem("token");
@@ -69,8 +70,6 @@ const SecondPage = () => {
     }
   }, []);
 
-  console.log(availableRooms);
-
   const viewArrayData = () => {
     if (city === "Dubai") {
       setLocationData(dubaiCities);
@@ -97,8 +96,6 @@ const SecondPage = () => {
   useEffect(() => {
     viewArrayData();
   }, [city]);
-
-  console.log(availableRooms);
 
   return (
     <>
@@ -155,6 +152,13 @@ const SecondPage = () => {
                   fn="roomSearch"
                   values={["property", "Roommate"]}
                 />
+                {searchType === "Roommate" && (
+                  <CustomizeSelectBox
+                    name={"Preference"}
+                    fn="action"
+                    values={["All", "HAVE ROOM", "NEED ROOM"]}
+                  />
+                )}
                 <CustomizeSelectBox
                   name={"Type"}
                   fn="propertyType"
@@ -210,16 +214,19 @@ const SecondPage = () => {
               >
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
                   <Typography variant="h5">
-                    {" "}
                     {searchType === "property"
                       ? `Apartments for Rent in ${city}`
-                      : `Roommates in ${city}`}
+                      : action === "HAVE ROOM"
+                      ? `HAVE ROOM in ${city}`
+                      : action === "NEED ROOM"
+                      ? `NEED ROOM in ${city}`
+                      : `All rooms in ${city}`}
                   </Typography>
                   <Typography variant="subtitle2">
-                    {" "}
-                    {availableRooms.length} results
+                    {Object.keys(availableRooms).length} results
                   </Typography>
                 </Box>
+
                 {/* <Box sx={{ display: "flex", flexDirection: "row" }}>
                   <PositionedMenu />
                   <IconLabelButtons
