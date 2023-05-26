@@ -34,17 +34,28 @@ import ChatBody from "./components/Chat/ChatBody";
 import PostAd from "./pages/PostAd";
 
 const App = () => {
+  const token = localStorage.getItem("token");
+
   // const [show, setShow] = useState(false);
   // const [notification, setNotification] = useState({ title: "", body: "" });
 
   const notificationpremision = async () => {
     const permission = await Notification.requestPermission();
     if (permission === "granted") {
-      const token = await getToken(messaging, {
+      const token1 = await getToken(messaging, {
         vapidKey:
           "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
       });
-      console.log("tojen", token);
+      console.log("tojen", token1);
+      const res = await axios.put(
+        "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/update-fcm-token",
+        {
+          fcmToken: token1,
+        },
+        { headers: { Authorization: token } }
+      );
+      console.log("res-------", res);
+      // console.log("tojen", permission);
     } else if (permission === "denied") {
       alert("You denied for the notification");
     }
