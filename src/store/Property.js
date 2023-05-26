@@ -5,6 +5,7 @@ const initialState = {
   edit: false,
   editedData: [],
   properties: [],
+  landlords: [],
   type: null,
   quantity: null,
   quantityTaken: null,
@@ -33,14 +34,16 @@ const initialState = {
   images: [],
   videos: [],
 
-  numberOfPeople: null,
-  gender: null,
+  numberOfPeople: "1 to 5",
+  gender: "Mix",
   grouping: null,
-  nationality: null,
-  smoking: null,
-  drinking: null,
-  visitors: null,
-  cooking: null,
+  nationality: "Mix",
+  smoking: "no",
+  drinking: "no",
+  visitors: "no",
+  cooking: "no",
+
+  landlord: {},
 };
 
 const PropertySlice = createSlice({
@@ -159,6 +162,12 @@ const PropertySlice = createSlice({
     deleteVideo(state, action) {
       state.videos = state.videos.filter((video, i) => i !== action.payload);
     },
+    landlords(state, action) {
+      state.landlords = action.payload;
+    },
+    landlord(state, action) {
+      state.landlord = action.payload;
+    },
 
     editedData(state, action) {
       state.properties = action.payload.properties;
@@ -178,10 +187,11 @@ const PropertySlice = createSlice({
       state.buildingName = action.payload.address.buildingName;
       state.appartmentNumber = action.payload.address.appartmentNumber;
       state.floorNumber = action.payload.address.floorNumber;
-      state.firstName = action.payload.agentInfo.firstName;
-      state.lastName = action.payload.agentInfo.lastName;
-      state.email = action.payload.agentInfo.email;
-      state.phone = action.payload.agentInfo.phone;
+      state.firstName = action.payload.agentInfo?.firstName;
+      state.lastName = action.payload.agentInfo?.lastName;
+      state.email = action.payload?.agentInfo?.email;
+      state.phone = action.payload.agentInfo?.phone;
+      state.poster = action.payload.poster;
       state.images = action.payload.images;
       state.videos = action.payload.videos;
       state.amenities = action.payload.amenities;
@@ -195,7 +205,7 @@ const PropertySlice = createSlice({
       state.cooking = action.payload.socialPreferences.cooking ? "yes" : "no";
       state.id = action.payload._id;
 
-      console.log(state.amenities, action.payload.amenities);
+      state.landlord = action.payload.landlord;
     },
     clearEditedData(state, action) {
       state.properties = null;
@@ -219,19 +229,20 @@ const PropertySlice = createSlice({
       state.lastName = null;
       state.email = null;
       state.phone = null;
-      state.numberOfPeople = null;
-      state.gender = null;
+      state.numberOfPeople = "1 to 5";
+      state.gender = "Mix";
       state.grouping = null;
-      state.nationality = null;
+      state.nationality = "Mix";
       state.videos = [];
       state.images = [];
-      state.smoking = "";
-      state.drinking = "";
-      state.visitors = "";
-      state.cooking = "";
+      state.smoking = "no";
+      state.drinking = "no";
+      state.visitors = "no";
+      state.cooking = "no";
       state.poster = {};
       state.id = null;
       state.amenities = [];
+      state.landlord = {};
     },
   },
 });

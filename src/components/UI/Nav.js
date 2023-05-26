@@ -278,9 +278,9 @@ const Nav = () => {
           }}
           onClick={() => handleClick("postProperty")}
           component={NavLink}
-          to={"/postProperty"}
+          to={user.type === "landlord" ? "/postProperty" : "/postAd"}
         >
-          Post Property
+          {user.type === "landlord" ? "Post Property" : "Post Ad"}
         </Button>
       </Stack>
       {!isLoggedIn ||

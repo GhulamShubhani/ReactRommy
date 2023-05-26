@@ -31,49 +31,45 @@ import { getToken } from "firebase/messaging";
 import StripePaymentCancel from "./pages/StripePaymentCancel";
 import axios from "axios";
 import ChatBody from "./components/Chat/ChatBody";
+import PostAd from "./pages/PostAd";
 
 const App = () => {
-
   // const [show, setShow] = useState(false);
   // const [notification, setNotification] = useState({ title: "", body: "" });
 
-  const notificationpremision= async ()=>{
-   const permission = await Notification.requestPermission()
-   if(permission==='granted'){
-     const token = await getToken(messaging, {
-       vapidKey:
-       "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
+  const notificationpremision = async () => {
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      const token = await getToken(messaging, {
+        vapidKey:
+          "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
       });
       console.log("tojen", token);
-  // console.log("tojen", permission);
-   }
-   else if(permission==="denied"){
-    alert("You denied for the notification")
-   }
-  }
+    } else if (permission === "denied") {
+      alert("You denied for the notification");
+    }
+  };
 
   useEffect(() => {
-   notificationpremision()
-   
-  }, [])
+    notificationpremision();
+  }, []);
 
-//   onMessageListener()
-//     .then((payload) => {
-//       // console.log(payload, "payload");
-//       setShow(true);
-//       setNotification({
-//         title: payload.notification.title,
-//         body: payload.notification.body,
-//       });
-//       <Alert severity="success" color="info">
-  
-// </Alert>
-//     })
-//     .catch((err) => console.log("failed: ", err));
-    
-    // console.log("notification", notification);
-    
-  
+  //   onMessageListener()
+  //     .then((payload) => {
+  //       // console.log(payload, "payload");
+  //       setShow(true);
+  //       setNotification({
+  //         title: payload.notification.title,
+  //         body: payload.notification.body,
+  //       });
+  //       <Alert severity="success" color="info">
+
+  // </Alert>
+  //     })
+  //     .catch((err) => console.log("failed: ", err));
+
+  // console.log("notification", notification);
+
   return (
     <Router>
       <div>
@@ -86,6 +82,8 @@ const App = () => {
             path="/postProperty"
             element={<PrivateRoute Component={PostProperty} />}
           />
+
+          <Route path="/postAd" element={<PrivateRoute Component={PostAd} />} />
           <Route
             path="/myBookings"
             element={<PrivateRoute Component={MyBookings} />}
