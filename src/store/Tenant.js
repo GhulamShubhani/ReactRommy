@@ -132,6 +132,41 @@ const TenantSlice = createSlice({
     cooking(state, action) {
       state.cooking = action.payload;
     },
+
+    clear(state, action) {
+      state.type = "Studio";
+      state.rentType = "Monthly";
+      state.action = "HAVE ROOM";
+      state.budget = null;
+      state.description = null;
+      state.movingDate = null;
+      state.images = [];
+      state.videos = [];
+      state.amenities = [];
+      state.interests = [];
+      state.country = null;
+      state.city = null;
+      state.location = null;
+      state.yourNationality = null;
+      state.yourAstrologicalSign = null;
+      state.yourAge = null;
+      state.yourGender = "Male";
+      state.yourOccupation = null;
+      state.yourLanguages = [];
+      state.yourLifeStyle = null;
+
+      state.gender = "Male";
+      state.lifeStyle = null;
+      state.grouping = "Single";
+      state.nationality = "Arab";
+      state.numberOfPeople = null;
+      state.smoking = false;
+      state.drinking = false;
+      state.visitors = false;
+      state.cooking = false;
+      state.pets = false;
+      state.party = false;
+    },
   },
 });
 

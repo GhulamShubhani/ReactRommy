@@ -31,6 +31,8 @@ import {
 import { astrologySigns } from "../utils/AstorologicalSigns";
 import { allAmenities } from "../utils/AllAmenities";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import { toastOptions } from "../utils/ToastOptions";
 
 const interestData = [
   "Reading",
@@ -71,7 +73,6 @@ const PostAd = () => {
     yourOccupation,
     yourLanguages,
     yourLifeStyle,
-    numberOfPeople,
 
     gender,
     lifeStyle,
@@ -151,17 +152,42 @@ const PostAd = () => {
         videos,
       };
       console.log(obj);
-
-      const { data } = await axios.post(
-        "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad",
-        obj,
-        { headers: { Authorization: token } }
-      );
-
-      console.log(data);
+      if (handleValidations()) {
+        const { data } = await axios.post(
+          "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/roommate-ad",
+          obj,
+          { headers: { Authorization: token } }
+        );
+        console.log(data);
+        toast.success("Ad posted auccessfully", toastOptions);
+        dispatch(TenantActions.clear());
+      }
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleValidations = () => {
+    const numberRegex = /^\d$/;
+    if (!budget) {
+      toast.error("Please enter budget", toastOptions);
+      return false;
+    }
+    if (!numberRegex.test(budget)) {
+      toast.error("Budget must be a number", toastOptions);
+      return false;
+    }
+
+    if (!city) {
+      toast.error("Please select city", toastOptions);
+      return false;
+    }
+    if (!location) {
+      toast.error("Please select Area", toastOptions);
+      return false;
+    }
+
+    return true;
   };
 
   const viewArrayData = () => {
@@ -860,6 +886,7 @@ const PostAd = () => {
           Submit
         </Button>
       </Grid>
+      <ToastContainer />
     </Grid>
   );
 };
