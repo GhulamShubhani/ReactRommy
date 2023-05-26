@@ -12,6 +12,8 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import firebase, { messaging, onMessageListener } from "../firebase/index";
 import axios from "axios";
+import DummyUserImage from "../assets/dummyUserImage.jpg";
+import DummyFemaleUserImage from "../assets/dummyFemaleUserImage.jpg";
 
 const MyAccount = () => {
   const user = JSON.parse(Cookies.get("user"));
@@ -21,41 +23,44 @@ const MyAccount = () => {
     navigate("/viewProfile");
   };
 
-   onMessageListener()
-     .then((payload) => {
-       console.log(payload, "payload");
+  onMessageListener()
+    .then((payload) => {
+      console.log(payload, "payload");
       //  setShow(true);
       //  setNotification({
       //    title: payload.notification.title,
       //    body: payload.notification.body,
       //  });
-       alert(payload.notification.title);
-       // <Alert severity="success" color="info">
-       //   Title:payload.notification.title
-       // </Alert>;
-     })
-     .catch((err) => console.log("failed: ", err));
+      alert(payload.notification.title);
+      // <Alert severity="success" color="info">
+      //   Title:payload.notification.title
+      // </Alert>;
+    })
+    .catch((err) => console.log("failed: ", err));
 
-  const testNotification = ()=>{
+  const testNotification = () => {};
 
-  }
-  const sendnoti = async() => {
-     const noti = await axios.post(
-        "https://fcm.googleapis.com/fcm/send",
-        {
-          to: "f8BytJHQr5Jx74gcDp8F3O:APA91bHEOisinu3b9gSwnKWqRAuCbuqXRO8KbmOC_gpriOTcu91o0jHA_lxIpgUCxQBKz5H4irjBHaXd-ejBhS9_IOo-443prvCxiUlr5pH8XvOcPALPFb7GVFzNUpjfGoFJuJakEaV-",
-          notification: {
-            title: "Add property",
-            body: "You add new property",
-          },
+  const sendnoti = async () => {
+    const noti = await axios.post(
+      "https://fcm.googleapis.com/fcm/send",
+      {
+        to: "f8BytJHQr5Jx74gcDp8F3O:APA91bHEOisinu3b9gSwnKWqRAuCbuqXRO8KbmOC_gpriOTcu91o0jHA_lxIpgUCxQBKz5H4irjBHaXd-ejBhS9_IOo-443prvCxiUlr5pH8XvOcPALPFb7GVFzNUpjfGoFJuJakEaV-",
+        notification: {
+          title: "Add property",
+          body: "You add new property",
         },
-        {
-          headers: { Authorization: "key=AAAAfyPvrw8:APA91bGidy7FBBsYJjDhWYvptDNAFHmHDyJGgfFm9qs3DS5VdwxG4aQT7Y5cGF-dddSF5v6O5tYLGY48Hz8Q2lyimjt8TIKGRpLoZF7lng0Xe6LluMGGnTzBYUA1ktjpSQgpJVQGYz2o",
-                    "Content-Type": "application/json" 
-                  },
-        }
-      );
+      },
+      {
+        headers: {
+          Authorization:
+            "key=AAAAfyPvrw8:APA91bGidy7FBBsYJjDhWYvptDNAFHmHDyJGgfFm9qs3DS5VdwxG4aQT7Y5cGF-dddSF5v6O5tYLGY48Hz8Q2lyimjt8TIKGRpLoZF7lng0Xe6LluMGGnTzBYUA1ktjpSQgpJVQGYz2o",
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
+
+  console.log(user);
 
   return (
     <>
@@ -100,7 +105,11 @@ const MyAccount = () => {
                 }}
               >
                 <img
-                  src="https://wallpapercave.com/wp/wp2599594.jpg"
+                  src={
+                    user.gender === "Male"
+                      ? DummyUserImage
+                      : DummyFemaleUserImage
+                  }
                   alt={`${user.firstName} profile`}
                   style={{
                     width: "100%",
@@ -148,7 +157,9 @@ const MyAccount = () => {
                 </Box>
 
                 <Box>
-                  <Typography onClick={testNotification}>Notifications</Typography>
+                  <Typography onClick={testNotification}>
+                    Notifications
+                  </Typography>
                   <Typography>0 unread notifications</Typography>
                 </Box>
               </Box>
