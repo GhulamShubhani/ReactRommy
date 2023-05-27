@@ -153,7 +153,7 @@ const Nav = () => {
               display: { xs: "none", md: "flex" },
             }}
           >
-            Finder
+            FINDER
           </Typography>
         </Stack>
       </NavLink>
