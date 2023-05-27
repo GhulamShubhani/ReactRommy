@@ -225,7 +225,21 @@ const ViewRoom = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  {!active && <Button variant="contained">Chat</Button>}
+                  {!active && (
+                    <Button
+                      variant="contained"
+                      sx={{
+                        borderRadius: 15,
+                        bgcolor: "orange",
+                        color: "#fff",
+                        "&:hover": {
+                          bgcolor: "#ff9900",
+                        },
+                      }}
+                    >
+                      Chat
+                    </Button>
+                  )}
                   <Typography sx={{ mt: 1, fontWeight: 700 }}>
                     {room?.budget.toLocaleString()} AED Budget
                   </Typography>

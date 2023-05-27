@@ -34,6 +34,7 @@ const Chat = () => {
   };
 
   const getConversationMessages = async (conversation) => {
+    console.log(conversation);
     try {
       const { data } = await axios.get(
         `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/messages/?otherId=${conversation.otherId}`,

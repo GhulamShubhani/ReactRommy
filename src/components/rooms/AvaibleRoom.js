@@ -118,7 +118,7 @@ const AvailableRoom = memo(({ room }) => {
             onClick={() =>
               searchType === "property"
                 ? navigate(`/rooms/view-room/${room.id}`)
-                : navigate(`/roommate/view-roommate/${room.id}`)
+                : navigate(`/upgrade-plan/user/${room.id}`)
             }
             style={{
               backgroundColor: "orange",

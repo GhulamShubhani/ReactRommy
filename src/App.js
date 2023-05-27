@@ -27,34 +27,36 @@ import PayRent from "./pages/PayRent";
 import MyAds from "./pages/MyAds";
 import ViewTenant from "./pages/ViewTenant";
 import firebase, { messaging, onMessageListener } from "./firebase/index";
-import { getToken } from "firebase/messaging";
 import StripePaymentCancel from "./pages/StripePaymentCancel";
 import axios from "axios";
 import ChatBody from "./components/Chat/ChatBody";
 import PostAd from "./pages/PostAd";
+import UpgradePlan from "./pages/UpgradePlan";
+
+import { getMessaging, getToken } from "firebase/messaging";
 
 const App = () => {
   const token = localStorage.getItem("token");
   const tokenExpiration = localStorage.getItem("tokenExpiration");
 
-  const notificationpremision = async () => {
+  const notificationPermission = async () => {
     try {
       if (token && Date.now() < parseInt(tokenExpiration)) {
         const permission = await Notification.requestPermission();
         if (permission === "granted") {
-          const token1 = await getToken(messaging, {
+          const fcmToken = await getToken(messaging, {
             vapidKey:
               "BK1YSNEVcw8HU87zqvSqIZIrLAegjVlT_LLIPVRycirOw5ghNJ0zH9uTT5zxceX2v04Z3E0vIIEb38Xk1QeEBRA",
           });
 
-          console.log(token1);
-          const res = await axios.put(
-            "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/update-fcm-token",
-            {
-              fcmToken: token1,
-            },
-            { headers: { Authorization: token } }
-          );
+          console.log(fcmToken);
+          if (fcmToken) {
+            await axios.put(
+              "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/update-fcm-token",
+              { fcmToken },
+              { headers: { Authorization: token } }
+            );
+          }
         } else if (permission === "denied") {
           alert("You denied for the notification");
         }
@@ -65,7 +67,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    notificationpremision();
+    notificationPermission();
   }, []);
 
   return (
@@ -116,6 +118,11 @@ const App = () => {
           <Route
             path="/bookings/property/pay-rent/:id"
             element={<PrivateRoute Component={PayRent} />}
+          />
+
+          <Route
+            path="/upgrade-plan/user/:id"
+            element={<PrivateRoute Component={UpgradePlan} />}
           />
 
           <Route
