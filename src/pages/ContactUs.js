@@ -21,6 +21,8 @@ import USA from "../assets/contact/USA.webp";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { toastOptions } from "../utils/ToastOptions";
+import TopBackground from "../components/postPropertyComponents/TopBackground";
+import BottomBackground from "../components/postPropertyComponents/BottomBackground";
 
 const ContactUs = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -70,171 +72,177 @@ const ContactUs = () => {
   };
 
   return (
-    <Container>
-      <Grid container sx={{ my: { md: "5%" } }}>
+    <>
+      <TopBackground />
+      <Container>
+        <Grid container sx={{ my: { md: "5%" } }}>
+          <Grid
+            item
+            md={6}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "left",
+              gap: 2,
+            }}
+          >
+            <Avatar
+              alt="UAE"
+              src={UAE2}
+              variant="square"
+              sx={{
+                width: 100,
+                height: 100,
+                objectFit: "cover",
+                //  borderRadius: "50%",
+              }}
+            />
+            <Box>
+              <Typography variant="subtitle1">United Arab Emirates</Typography>
+              <Typography variant="subtitle1">
+                Location : Dubai, 16, Misakin St, Al Danah 22213
+              </Typography>
+              <Typography variant="subtitle1">Tel +971 50 601 3921</Typography>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            md={6}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "left",
+              gap: 2,
+            }}
+          >
+            <Avatar
+              alt="USA"
+              src={USA}
+              variant="square"
+              sx={{
+                width: 100,
+                height: 100,
+                objectFit: "cover",
+              }}
+            />
+            <Box>
+              <Typography variant="subtitle1">
+                United State of America
+              </Typography>
+              <Typography variant="subtitle1">
+                Location : Global Strategy Catalyst Group LLc 401 Ryland St,Suit
+                200-A, Reno, Nv. 89502
+              </Typography>
+              <Typography variant="subtitle1">Tel +1412 403 3921</Typography>
+            </Box>
+          </Grid>
+        </Grid>
         <Grid
-          item
-          md={6}
+          container
+          spacing={2}
           sx={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "left",
-            gap: 2,
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <Avatar
-            alt="UAE"
-            src={UAE2}
-            variant="square"
-            sx={{
-              width: 100,
-              height: 100,
-              objectFit: "cover",
-              //  borderRadius: "50%",
-            }}
-          />
-          <Box>
-            <Typography variant="subtitle1">United Arab Emirates</Typography>
-            <Typography variant="subtitle1">
-              Location : Dubai, 16, Misakin St, Al Danah 22213
-            </Typography>
-            <Typography variant="subtitle1">Tel +971 50 601 3921</Typography>
-          </Box>
+          <Grid item xs={12} sm={12} md={6} sx={{ my: { md: "1%" } }}>
+            <Paper sx={{ backgroundColor: "#E6E6E6" }}>
+              <ContactUsText />
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid
-          item
-          md={6}
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "left",
-            gap: 2,
-          }}
-        >
-          <Avatar
-            alt="USA"
-            src={USA}
-            variant="square"
-            sx={{
-              width: 100,
-              height: 100,
-              objectFit: "cover",
-            }}
-          />
-          <Box>
-            <Typography variant="subtitle1">United State of America</Typography>
-            <Typography variant="subtitle1">
-              Location : Global Strategy Catalyst Group LLc 401 Ryland St,Suit
-              200-A, Reno, Nv. 89502
-            </Typography>
-            <Typography variant="subtitle1">Tel +1412 403 3921</Typography>
-          </Box>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Grid item xs={12} sm={12} md={6} sx={{ my: { md: "1%" } }}>
-          <Paper sx={{ backgroundColor: "#E6E6E6" }}>
-            <ContactUsText />
-          </Paper>
-        </Grid>
-      </Grid>
-      <Grid container justifyContent={"center"} my={2}>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={handleDeleteUserAccount}
-        >
-          Delete Account
-        </Button>
-      </Grid>
-      <Dialog
-        open={deleteDialogOpen}
-        onClose={() => setDeleteDialogOpen(false)}
-      >
-        <DialogTitle fontWeight={700}>Confirm Account Deletion</DialogTitle>
-        <DialogContent>
-          <Typography variant="body1">
-            By deleting your account, all your personal information and ads will
-            be deleted without the possibility of recovery. It is recommended to
-            withdraw all the money in your account before performing this
-            action, as Roomy Finder will not refund any money to deleted
-            accounts.
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+        <Grid container justifyContent={"center"} my={2}>
           <Button
-            onClick={handleDeleteConfirmation}
-            color="error"
             variant="contained"
-          >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog
-        open={confirmationDialogOpen}
-        onClose={() => setConfirmationDialogOpen(false)}
-      >
-        <DialogTitle>Confirm Account Deletion</DialogTitle>
-        <DialogContent>
-          <Typography variant="body1">
-            Please enter your email and password to confirm the account
-            deletion.
-          </Typography>
-          {confirmationDialogOpen && (
-            <>
-              <TextField
-                label="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                fullWidth
-                margin="normal"
-                variant="outlined"
-              />
-              <TextField
-                label="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                fullWidth
-                margin="normal"
-                variant="outlined"
-                type={showPassword ? "text" : "password"}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton onClick={togglePasswordVisibility}>
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  ),
-                }}
-              />
-            </>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setConfirmationDialogOpen(false)}>
-            Cancel
-          </Button>
-          <Button
-            onClick={handleConfirmDelete}
             color="error"
-            variant="contained"
+            onClick={handleDeleteUserAccount}
           >
-            Delete
+            Delete Account
           </Button>
-        </DialogActions>
-      </Dialog>
-      <ToastContainer />
-    </Container>
+        </Grid>
+        <Dialog
+          open={deleteDialogOpen}
+          onClose={() => setDeleteDialogOpen(false)}
+        >
+          <DialogTitle fontWeight={700}>Confirm Account Deletion</DialogTitle>
+          <DialogContent>
+            <Typography variant="body1">
+              By deleting your account, all your personal information and ads
+              will be deleted without the possibility of recovery. It is
+              recommended to withdraw all the money in your account before
+              performing this action, as Roomy Finder will not refund any money
+              to deleted accounts.
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+            <Button
+              onClick={handleDeleteConfirmation}
+              color="error"
+              variant="contained"
+            >
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={confirmationDialogOpen}
+          onClose={() => setConfirmationDialogOpen(false)}
+        >
+          <DialogTitle>Confirm Account Deletion</DialogTitle>
+          <DialogContent>
+            <Typography variant="body1">
+              Please enter your email and password to confirm the account
+              deletion.
+            </Typography>
+            {confirmationDialogOpen && (
+              <>
+                <TextField
+                  label="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  fullWidth
+                  margin="normal"
+                  variant="outlined"
+                />
+                <TextField
+                  label="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  fullWidth
+                  margin="normal"
+                  variant="outlined"
+                  type={showPassword ? "text" : "password"}
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={togglePasswordVisibility}>
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    ),
+                  }}
+                />
+              </>
+            )}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setConfirmationDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleConfirmDelete}
+              color="error"
+              variant="contained"
+            >
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <ToastContainer />
+      </Container>
+      <BottomBackground />
+    </>
   );
 };
 

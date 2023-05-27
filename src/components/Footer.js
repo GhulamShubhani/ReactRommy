@@ -55,7 +55,7 @@ const Footer = () => {
                 variant="h5"
                 sx={{ fontWeight: "bolder", color: "orange" }}
               >
-                Finder
+                FINDER
               </Typography>
             </Box>
           </Grid>
