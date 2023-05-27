@@ -68,6 +68,7 @@ const CarouselWithMultipleImage = (props) => {
             // onClick={() => navigate("/")}
             sx={{ cursor: "pointer" }}
           >
+            {console.log(imageSet)}
             <Grid container spacing={2}>
               {imageSet.map((value, id) =>
                 Object.entries(value).map(([key, val]) => {
@@ -76,6 +77,10 @@ const CarouselWithMultipleImage = (props) => {
                       return (
                         <Grid item xs={12} sm={6} md={3} borderRadius={"15px"}>
                           <MultipleImages0 images={val} />
+                          <Typography fontWeight={700}>{value.type}</Typography>
+                          <Typography fontWeight={700}>
+                            {value.monthlyPrice} AED / month
+                          </Typography>
                         </Grid>
                       );
                     }

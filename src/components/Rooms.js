@@ -48,7 +48,7 @@ const Rooms = () => {
 
   return (
     <div className="flex justify-center mt-10">
-      <div className="m-10 flex flex-col md:flex-row gap-10">
+      <div className="m-10 flex md:flex-row gap-10">
         <div
           className="flex flex-col md:flex-row cursor-pointer"
           onClick={() => handleProperty()}
@@ -57,10 +57,10 @@ const Rooms = () => {
             src={RoomBuilding}
             alt="property"
             width={"200px"}
-            className="h-auto md:h-40 w-auto md:w-40 mx-auto md:mx-0 relative md:left-19 bottom-[18px]"
+            className="h-auto md:h-40 w-auto md:w-40 mx-auto md:mx-0 relative md:left-19 bottom-[18px] w-full md:w-auto md:block hidden"
           />
           <p
-            className={`p-5 md:p-10 h-auto md:h-32 w-auto md:w-64 text-center text-xl  bg-white shadow-md text-orange-500 flex-1 md:ml-[-40px] font-bold ${
+            className={`p-5 md:p-10 h-auto md:h-32 w-auto md:w-64 text-center text-xl bg-white shadow-md text-orange-500 flex-1 md:ml-[-40px] font-bold ${
               activeLink === "property"
                 ? "border-x-2 border-t-2 border-purple-500 rounded-md bg-white text-purple-600"
                 : "rounded-md"
@@ -74,6 +74,7 @@ const Rooms = () => {
             Find Room
           </p>
         </div>
+
         <div
           className="flex flex-col md:flex-row cursor-pointer"
           onClick={() => handleRoomMate()}
@@ -82,14 +83,14 @@ const Rooms = () => {
             src={RoomWomen}
             alt="roommateAds"
             width={"200px"}
-            className="h-auto md:h-48 w-auto md:w-40 mx-auto md:mx-0 relative md:left-24 bottom-[40px]"
+            className="h-auto md:h-48 w-auto md:w-40 mx-auto md:mx-0 relative md:left-24 bottom-[40px] w-full md:w-auto md:block hidden"
           />
           <p
-            className={`p-5 md:p-10 h-auto md:h-32 w-auto md:w-64 text-center text-xl  bg-white text-orange-500 shadow-md flex-1 font-bold ${
+            className={`p-5 md:p-10 h-auto md:h-32 w-auto md:w-64 text-center text-xl bg-white text-orange-500 shadow-md flex-1 font-bold ${
               activeLink === "roommate"
                 ? "border-x-2 border-t-2 border-purple-500 rounded-md bg-white text-purple-600"
                 : "rounded-md"
-            } `}
+            }`}
             style={{
               boxShadow: "0 0 20px 5px rgba(0,0,0,0.75)",
               WebkitBoxShadow: "0 0 20px 5px rgba(0,0,0,0.75)",
