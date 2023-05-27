@@ -26,20 +26,25 @@ import AboutBooking from "./pages/AboutBooking";
 import PayRent from "./pages/PayRent";
 import MyAds from "./pages/MyAds";
 import ViewTenant from "./pages/ViewTenant";
+// import firebase, {  onMessageListener } from "./firebase/index";
 import firebase, { messaging, onMessageListener } from "./firebase/index";
+import {
+  getToken,
+  onMessage,
+  getMessaging,
+  deleteToken,
+} from "firebase/messaging";
 import StripePaymentCancel from "./pages/StripePaymentCancel";
 import axios from "axios";
 import ChatBody from "./components/Chat/ChatBody";
 import PostAd from "./pages/PostAd";
 import UpgradePlan from "./pages/UpgradePlan";
 
-import { getMessaging, getToken } from "firebase/messaging";
-
 const App = () => {
   const token = localStorage.getItem("token");
   const tokenExpiration = localStorage.getItem("tokenExpiration");
 
-  const notificationPermission = async () => {
+  const notificationpremision = async () => {
     try {
       if (token && Date.now() < parseInt(tokenExpiration)) {
         const permission = await Notification.requestPermission();
@@ -61,13 +66,66 @@ const App = () => {
           alert("You denied for the notification");
         }
       }
+      console.log("56789");
     } catch (err) {
       console.log(err);
     }
   };
 
+  // const handleTokenRefresh = async () => {
+  //   try {
+  //     // Delete the previous token
+  //     await deleteToken(getMessaging());
+
+  //     // Retrieve a new token
+  //     const refreshedToken = await getToken(getMessaging());
+  //     console.log("Refreshed FCM token:", refreshedToken);
+  //     try{
+  //       const res = await axios.put(
+  //         "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/update-fcm-token",
+  //         {
+  //           fcmToken: refreshedToken,
+  //         },
+  //         { headers: { Authorization: token } }
+  //       );
+
+  //     }catch(err){
+  //       console.log(err)
+  //     }
+  //     // Send the refreshed token to your backend for storage or update
+  //     // Backend API endpoint: POST /tokens
+  //     // axios.post('/tokens', { token: refreshedToken });
+  //   } catch (error) {
+  //     console.error("Error refreshing FCM token:", error);
+  //   }
+  // };
+
+  const handleTokenRefresh = async () => {
+    try {
+      const refreshedToken = await getToken(getMessaging());
+      console.log("Refreshed FCM token:", refreshedToken);
+      const res = await axios.put(
+        "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/auth/update-fcm-token",
+        {
+          fcmToken: refreshedToken,
+        },
+        { headers: { Authorization: token } }
+      );
+    } catch (error) {
+      console.error("Error refreshing FCM token:", error);
+    }
+  };
+
   useEffect(() => {
-    notificationPermission();
+    // notificationpremision();
+    // ==================
+
+    notificationpremision();
+    handleTokenRefresh();
+
+    // Add message listener to handle token refresh
+
+    // ===========
   }, []);
 
   return (
