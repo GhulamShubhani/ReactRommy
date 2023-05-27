@@ -19,15 +19,8 @@ export const auth = getAuth(app);
 export const storage = getStorage(app);
 export const messaging = getMessaging(app);
 
-<<<<<<< HEAD
-=======
-
-export default app;
-
 // ==================================================
 
-
->>>>>>> a6f4f826db50f9a2b6078423253cb8b105ccf4a2
 export const onMessageListener = () =>
   new Promise((resolve) => {
     onMessage(messaging, (payload) => {
