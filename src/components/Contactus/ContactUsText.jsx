@@ -57,11 +57,11 @@ export default function ContactUsText() {
         }}
       >
         <Typography variant="h4" sx={{ my: 1 }}>
-          Let's talk about Roomy Finder
+          Let's talk about RoomyFINDER
         </Typography>
         <Typography variant="subtitle2">
           We're here to answer your questions and discuss the future of the
-          Roomy Finder
+          RoomyFINDER
         </Typography>
 
         <Box sx={{ mt: 3 }}>
