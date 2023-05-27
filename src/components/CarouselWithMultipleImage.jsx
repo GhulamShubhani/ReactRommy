@@ -77,10 +77,21 @@ const CarouselWithMultipleImage = (props) => {
                       return (
                         <Grid item xs={12} sm={6} md={3} borderRadius={"15px"}>
                           <MultipleImages0 images={val} />
-                          <Typography fontWeight={700}>{value.type}</Typography>
-                          <Typography fontWeight={700}>
-                            {value.monthlyPrice} AED / month
-                          </Typography>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "start",
+                              flexDirection: "column",
+                              alignItems: "start",
+                            }}
+                          >
+                            <Typography fontWeight={400}>
+                              {value.type}
+                            </Typography>
+                            <Typography fontWeight={700}>
+                              {value.monthlyPrice} AED / month
+                            </Typography>
+                          </Box>
                         </Grid>
                       );
                     }
