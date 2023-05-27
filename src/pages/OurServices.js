@@ -99,8 +99,9 @@ const OurServices = () => {
           top: 0,
           left: 0,
           width: "100%",
-          height: "90vh",
-          backgroundImage: `url(${MainBgImg})`,
+          height: "45vh",
+          backgroundImage:
+            "linear-gradient(90deg, rgba(0,1,36,1) 0%, rgba(73,9,121,1) 35%, rgba(192,0,255,1) 100%);", // Update this line
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           marginBottom: "50px",
@@ -142,7 +143,7 @@ const OurServices = () => {
             <FloatingImage />
           </Grid>
         </Grid>
-        <Box sx={{ pt: { xs: 6, md: 10 } }}>
+        <Box sx={{ pt: { xs: 6 } }}>
           <CityCarousel />
           <Rooms />
           <Box sx={{ display: "flex", flexDirection: "column", mb: 4 }}>
@@ -157,6 +158,7 @@ const OurServices = () => {
               <Typography variant="h5" sx={{ my: 1 }}>
                 Partitions for rent in Sharjah
               </Typography>
+
               <CarouselWithMultipleImage
                 PartitionAddAvilableRoom={PartitionAddAvilableRoom}
               />

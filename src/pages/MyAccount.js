@@ -249,7 +249,11 @@ const MyAccount = () => {
               </Box>
             </Grid>
           </Grid>
-          <Grid item sx={{ width: "100%" }}>
+          <Grid
+            item
+            sx={{ width: "100%" }}
+            onClick={() => navigate("/aboutUs")}
+          >
             <Grid
               sx={{
                 display: "flex",
@@ -257,6 +261,7 @@ const MyAccount = () => {
                 alignItems: "center",
                 bgcolor: "#D9D9D9",
                 borderRadius: "15px",
+                cursor: "pointer",
                 mb: 2,
               }}
             >
@@ -268,7 +273,7 @@ const MyAccount = () => {
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography onClick={sendnoti}>About</Typography>
+                  <Typography>About</Typography>
                 </Box>
               </Box>
               <Box>

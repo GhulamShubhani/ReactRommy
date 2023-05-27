@@ -66,7 +66,6 @@ const App = () => {
           alert("You denied for the notification");
         }
       }
-      console.log("56789");
     } catch (err) {
       console.log(err);
     }

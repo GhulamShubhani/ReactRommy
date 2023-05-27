@@ -11,7 +11,7 @@ const ImageCarousel1 = ({ images }) => {
       <Carousel showArrows={false} dynamicHeight={false}>
         {images.map((image, index) => (
           <>
-            <Box key={index}>
+            <Box key={index} sx={{ borderRadius: "15px", overflow: "hidden" }}>
               <img
                 src={image}
                 alt={`img ${index}`}
@@ -74,7 +74,7 @@ const CarouselWithMultipleImage = (props) => {
                   if (key === "images") {
                     if (val.length >= 0) {
                       return (
-                        <Grid item xs={12} sm={6} md={3}>
+                        <Grid item xs={12} sm={6} md={3} borderRadius={"15px"}>
                           <MultipleImages0 images={val} />
                         </Grid>
                       );

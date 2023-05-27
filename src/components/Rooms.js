@@ -81,7 +81,7 @@ const Rooms = () => {
           <img
             src={RoomWomen}
             alt="roommateAds"
-            width={"250px"}
+            width={"200px"}
             className="h-auto md:h-48 w-auto md:w-40 mx-auto md:mx-0 relative md:left-24 bottom-[40px]"
           />
           <p

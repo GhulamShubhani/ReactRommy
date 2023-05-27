@@ -43,8 +43,8 @@ const CityCarousel = () => {
           objectFit: "cover",
           margin: "auto",
           borderRadius: "0.5rem",
-          height: isActive ? "45vh" : "35vh",
-          width: isActive ? "35vw" : "25vw",
+          height: isActive ? "40vh" : "30vh",
+          width: isActive ? "30vw" : "25vw",
         }}
       />
     </NavLink>
@@ -93,8 +93,10 @@ const CityCarousel = () => {
             left: "0",
             right: "0",
             color: "white",
-            fontWeight: "semibold",
+            fontWeight: "bold",
             textAlign: "center",
+            fontSize: "1.3rem",
+            textShadow: "4px 4px 8px black",
           }}
         >
           {city}

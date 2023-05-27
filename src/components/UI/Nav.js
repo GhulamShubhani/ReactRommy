@@ -149,11 +149,11 @@ const Nav = () => {
             variant="h5"
             sx={{
               fontWeight: "bolder",
-              color: "purple",
+              color: "orange",
               display: { xs: "none", md: "flex" },
             }}
           >
-            Finder
+            FINDER
           </Typography>
         </Stack>
       </NavLink>
