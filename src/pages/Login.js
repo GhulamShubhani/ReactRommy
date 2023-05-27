@@ -63,8 +63,6 @@ const Login = () => {
   const emailInputHandler = (e) => {
     const emailValue = e.target.value;
     dispatch(UserActions.email(emailValue));
-
-    // Email validation using regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(emailValue)) {
       setEmailError("Please enter a valid email address");
@@ -91,7 +89,7 @@ const Login = () => {
           { email, password, fcmToken: "123" }
         );
 
-        console.log(loginResponse);
+        console.log(response);
 
         const { data } = loginResponse;
         Cookies.set("user", JSON.stringify(data), { expires: 365 });

@@ -6,6 +6,9 @@ import Cookies from "js-cookie";
 import TopBackground from "../components/postPropertyComponents/TopBackground.js";
 import BottomBackground from "../components/postPropertyComponents/BottomBackground.js";
 
+import { getMessaging } from "firebase/messaging";
+import { auth } from "../firebase/index.js";
+
 const AboutBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -95,6 +98,42 @@ const AboutBooking = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleChatWithClient = async (clientId) => {
+    try {
+      // Get the messaging service instance
+      const messaging = getMessaging(auth);
+
+      // Generate FCM token for the user
+      const token = await messaging.getToken();
+      // Do something with the token (e.g., send it to the server, store it in the user's profile)
+      console.log("FCM Token:", token);
+
+      // Proceed with handling the chat with the client
+      // ...
+    } catch (error) {
+      // Handle any errors that occur during token generation
+      console.error("Error generating FCM token:", error);
+    }
+    // try {
+    //   console.log(clientId);
+
+    //   const { data } = await axios.post(
+    //     "https://roomy-finder-evennode.ap-1.evennode.com/api/v1/messages/send",
+    //     {
+    //       recieverFcmToken:
+    //         "f-72aL-Mu90iz8W7sPNAPZ:APA91bGCYuLUNNjfMr__02hCjKm44aQw2jWhIWzd4G_To7CReq0CDEDO2OfYcXzka55Q-BwPZ3vIR6PQ-MEJRvfXkHvhnNKxJ1YVLZN0uoK7bYwbMdtI_KUi9MSKGTTjjVsHdSWbJOFY",
+    //       recieverId: clientId,
+    //       type: "text",
+    //       body: " ",
+    //     },
+    //     { headers: { Authorization: token } }
+    //   );
+    //   console.log(data);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   useEffect(() => {
@@ -445,7 +484,21 @@ const AboutBooking = () => {
                 spacing={2}
                 sx={{ justifyContent: "center", mt: 5 }}
               >
-                <Button variant="contained">Chat with Client</Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    borderRadius: 15,
+                    bgcolor: "orange",
+                    fontWeight: "700",
+                    color: "#fff",
+                    "&:hover": {
+                      bgcolor: "#ff9900",
+                    },
+                  }}
+                  onClick={() => handleChatWithClient(property.poster.id)}
+                >
+                  Chat with Client
+                </Button>
               </Grid>
             )}
 
