@@ -16,8 +16,12 @@ import {
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import ContactUsText from "../components/Contactus/ContactUsText";
-import UAE2 from "../assets/contact/UAE2.jpg";
+import UAE1 from "../assets/contact/UAE2.jpg";
+import UAE2 from "../assets/contact/UAEFlag1.jpg";
+import UAE3 from "../assets/contact/UAE.png";
 import USA from "../assets/contact/USA.webp";
+import USA1 from "../assets/contact/usa4.jpg";
+import USA2 from "../assets/contact/usa.png";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { toastOptions } from "../utils/ToastOptions";
@@ -83,22 +87,36 @@ const ContactUs = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "left",
-              gap: 2,
+              my: { xs: 1 },
+              // gap: 2,
             }}
           >
-            <Avatar
-              alt="UAE"
-              src={UAE2}
-              variant="square"
+            <Box
               sx={{
-                width: 100,
+                width: 80,
                 height: 100,
-                objectFit: "cover",
+
                 //  borderRadius: "50%",
               }}
-            />
+            >
+              <Avatar
+                alt="UAE"
+                src={UAE1}
+                variant="square"
+                sx={{
+                  mt: 0.5,
+                  objectFit: "cover",
+                  //  borderRadius: "50%",
+                }}
+              />
+            </Box>
             <Box>
-              <Typography variant="subtitle1">United Arab Emirates</Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{ fontWeight: "bold", fontSize: "1.3rem" }}
+              >
+                United Arab Emirates
+              </Typography>
               <Typography variant="subtitle1">
                 Location : Dubai, 16, Misakin St, Al Danah 22213
               </Typography>
@@ -112,28 +130,44 @@ const ContactUs = () => {
               display: "flex",
               flexDirection: "row",
               justifyContent: "left",
-              gap: 2,
+              // gap: 2,
             }}
           >
-            <Avatar
-              alt="USA"
-              src={USA}
-              variant="square"
+            <Box
               sx={{
                 width: 100,
                 height: 100,
-                objectFit: "cover",
+
+                //  borderRadius: "50%",
               }}
-            />
+            >
+              <Avatar
+                alt="UAE"
+                src={USA1}
+                variant="square"
+                sx={{
+                  mr: { xs: 1 },
+                  mt: 1,
+
+                  objectFit: "cover",
+                  //  borderRadius: "50%",
+                }}
+              />
+            </Box>
             <Box>
-              <Typography variant="subtitle1">
+              <Typography
+                variant="subtitle1"
+                sx={{ fontWeight: "bold", fontSize: "1.3rem" }}
+              >
                 United State of America
               </Typography>
               <Typography variant="subtitle1">
                 Location : Global Strategy Catalyst Group LLc 401 Ryland St,Suit
                 200-A, Reno, Nv. 89502
               </Typography>
-              <Typography variant="subtitle1">Tel +1412 403 3921</Typography>
+              <Typography variant="subtitle1" sx={{ mb: 2 }}>
+                Tel +1412 403 3921
+              </Typography>
             </Box>
           </Grid>
         </Grid>
@@ -147,22 +181,16 @@ const ContactUs = () => {
             justifyContent: "center",
           }}
         >
-          <Grid item xs={12} sm={12} md={6} sx={{ my: { md: "1%" } }}>
+          {/* <Grid item xs={12} sm={12} md={6} sx={{ my: { md: "1%" } }}>
             <Paper sx={{ backgroundColor: "#E6E6E6" }}>
               <ContactUsText />
             </Paper>
-          </Grid>
+          </Grid> */}
         </Grid>
-        <Grid container justifyContent={"center"} my={2}>
-          {/* <Button
-            variant="contained"
-            color="error"
-            onClick={handleDeleteUserAccount}
-          >
-            Delete Account
-          </Button> */}
-        </Grid>
-        <Dialog
+        {/* <Grid container justifyContent={"center"} my={2}>
+         
+        </Grid> */}
+        {/* <Dialog
           open={deleteDialogOpen}
           onClose={() => setDeleteDialogOpen(false)}
         >
@@ -186,8 +214,8 @@ const ContactUs = () => {
               Delete
             </Button>
           </DialogActions>
-        </Dialog>
-        <Dialog
+        </Dialog> */}
+        {/* <Dialog
           open={confirmationDialogOpen}
           onClose={() => setConfirmationDialogOpen(false)}
         >
@@ -238,8 +266,8 @@ const ContactUs = () => {
               Delete
             </Button>
           </DialogActions>
-        </Dialog>
-        <ToastContainer />
+        </Dialog> */}
+        {/* <ToastContainer /> */}
       </Container>
       <BottomBackground />
     </>
@@ -247,3 +275,6 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+
+
+
