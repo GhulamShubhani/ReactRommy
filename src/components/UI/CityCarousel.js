@@ -18,8 +18,8 @@ const CityCarousel = () => {
 
   useEffect(() => {
     const updateCarouselCities = () => {
-      const slicedCities = cities.slice(currentCityIndex, currentCityIndex + 3);
-      const remainingCities = cities.slice(0, 3 - slicedCities.length);
+      const slicedCities = cities.slice(currentCityIndex, currentCityIndex + 5);
+      const remainingCities = cities.slice(0, 5 - slicedCities.length);
       setCarouselCities(slicedCities.concat(remainingCities));
     };
 
@@ -47,7 +47,7 @@ const CityCarousel = () => {
           objectFit: "cover",
           margin: "auto",
           borderRadius: "1rem",
-          height: isActive ? "270px" : "240px",
+          height: isActive ? "28vh" : "25vh",
           width: isActive ? "24vw" : "22vw",
         }}
       />
@@ -65,7 +65,7 @@ const CityCarousel = () => {
   ];
 
   const carouselItems = carouselCities.map((city, index) => {
-    const isActive = index === 1; // Check if the index is the middle index
+    const isActive = index === 2; // Check if the index is the middle index
 
     const styles = isActive
       ? {
@@ -104,7 +104,7 @@ const CityCarousel = () => {
             display: "flex",
             justifyContent: "center",
             alignSelf: "end",
-            mb: isActive ? 6 :"",
+            mb: isActive ? 6 : "",
 
             // textAlign: "butoom",
             // marginTop: "auto",
@@ -112,7 +112,12 @@ const CityCarousel = () => {
             textShadow: "6px 6px 5px black",
           }}
         >
-          <Typography sx={{ fontWeight: "bold", fontSize: "1.3rem" }}>
+          <Typography
+            sx={{
+              fontWeight: { xs: "None", sm: "bold" },
+              fontSize: { xs: "None", sm: "1.3rem" },
+            }}
+          >
             {city}
           </Typography>
         </Box>
