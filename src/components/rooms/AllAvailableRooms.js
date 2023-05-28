@@ -5,11 +5,28 @@ import AvailableRoom from "./AvaibleRoom";
 
 const AllAvailableRooms = () => {
   const availableRooms = useSelector((state) => state.search.availableRooms);
+  const minPrice = useSelector((state) => state.search.minPrice);
+  const maxPrice = useSelector((state) => state.search.maxPrice);
 
   let allAvailableRoomsData = "";
   if (availableRooms.length !== 0) {
     allAvailableRoomsData = availableRooms?.map((room, index) => {
-      return <AvailableRoom room={room} key={index} />;
+      if (minPrice && !maxPrice && room.monthlyPrice > minPrice) {
+        return <AvailableRoom room={room} key={index} />;
+      }
+      if (maxPrice && !minPrice && room.monthlyPrice < maxPrice) {
+        return <AvailableRoom room={room} key={index} />;
+      }
+      if (
+        minPrice &&
+        maxPrice &&
+        room.monthlyPrice >= minPrice &&
+        room.monthlyPrice <= maxPrice
+      ) {
+        return <AvailableRoom room={room} key={index} />;
+      } else {
+        return <AvailableRoom room={room} key={index} />;
+      }
     });
   } else {
     allAvailableRoomsData = <p>No Results Found</p>;

@@ -28,14 +28,7 @@ const Search = () => {
         },
       }}
     >
-      <ButtonGroup
-        sx={{
-          mb: 1,
-          "@media (max-width: 600px)": {
-            flexDirection: "column",
-          },
-        }}
-      >
+      <ButtonGroup sx={{ m: 1 }}>
         <Button
           variant={searchType1 === "property" ? "contained" : "outlined"}
           color="secondary"

@@ -9,18 +9,26 @@ const initialState = {
   commercialProperty: false,
   availableRooms: [],
   budget: [0, 10000],
-  amneities: [],
+  amenities: [],
   preferences: [],
   propertyTypes: [],
   PreferredRentType: null,
   gender: null,
   action: null,
+  minPrice: null,
+  maxPrice: null,
 };
 
 const SearchSlice = createSlice({
   name: "Search",
   initialState,
   reducers: {
+    minPrice(state, action) {
+      state.minPrice = action.payload;
+    },
+    maxPrice(state, action) {
+      state.maxPrice = action.payload;
+    },
     action(state, action) {
       state.action = action.payload;
     },

@@ -10,10 +10,17 @@ import {
   MenuItem,
   FormControl,
   Button,
+  Input,
   InputLabel,
   Autocomplete,
+  FormControlLabel,
+  Checkbox,
+  Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 import {
   citydata,
   dubaiCities,
@@ -36,6 +43,14 @@ const SearchInputs = () => {
   const propertyType = useSelector((state) => state.search.propertyType);
   const location = useSelector((state) => state.search.location);
   const price = useSelector((state) => state.search.price);
+  const minPrice = useSelector((state) => state.search.minPrice);
+  const maxPrice = useSelector((state) => state.search.maxPrice);
+  const gender = useSelector((state) => state.search.gender);
+  const rentPeriod = useSelector((state) => state.search.PreferredRentType);
+  const commercialProperty = useSelector(
+    (state) => state.search.commercialProperty
+  );
+  const [advanceSearch, setAdvanceSearch] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [locationdata, setlocationdata] = useState([]);
@@ -84,7 +99,6 @@ const SearchInputs = () => {
 
   const handleCityClick = (event, value) => {
     dispatch(SearchActions.searchText(value));
-    // setFilteredCities([]);
   };
 
   const handleLocationClick = (event, value) => {
@@ -93,6 +107,28 @@ const SearchInputs = () => {
 
   const handlePropertyTypeChange = (e) => {
     dispatch(SearchActions.propertyType(e.target.value));
+  };
+
+  const commercialPropertyHandle = (e) => {
+    dispatch(SearchActions.commercialProperty(e.target.checked));
+  };
+
+  const handleGenderChange = (e) => {
+    dispatch(SearchActions.gender(e.target.value));
+  };
+
+  const handleRentPeriodChange = (e) => {
+    dispatch(SearchActions.PreferredRentType(e.target.value));
+  };
+
+  const handleAdvanceSearch = (e) => {
+    setAdvanceSearch(!advanceSearch);
+  };
+  const handleMinPriceInput = (e) => {
+    dispatch(SearchActions.minPrice(e.target.value));
+  };
+  const handleMaxPriceInput = (e) => {
+    dispatch(SearchActions.maxPrice(e.target.value));
   };
 
   const handleSearch = async () => {
@@ -116,6 +152,18 @@ const SearchInputs = () => {
         obj.price = price;
       }
 
+      if (gender && gender !== "All") {
+        obj.gender = gender;
+      }
+
+      if (rentPeriod) {
+        obj.preferedRentType = rentPeriod;
+      }
+
+      // if (commercialProperty) {
+      //   obj.commercialProperty = commercialProperty;
+      // }
+
       if (Object.keys(obj).length > 0) {
         const { data } = await axios.post(
           `https://roomy-finder-evennode.ap-1.evennode.com/api/v1/ads/${searchType}-ad/available`,
@@ -136,13 +184,14 @@ const SearchInputs = () => {
   const styles = {
     searchContainer: {
       display: "flex",
-      spacing: 2,
+      gap: 2,
       flexDirection: { xs: "column", lg: "row" },
       marginBottom: 2,
     },
     formControl: {
       flex: { xs: "1 1 100%", lg: "1 1 auto" },
       marginRight: { xs: 0, lg: 2 },
+      width: "100%", // Add this line to set the width to 100%
     },
     buttonContainer: {
       flex: { xs: "1 1 100%", lg: "1 1 auto" },
@@ -172,6 +221,9 @@ const SearchInputs = () => {
     advancedSearchText: {
       marginTop: { xs: 2, lg: 0 },
       marginLeft: { xs: 0, lg: 2 },
+      display: "flex",
+      alignItems: "center",
+      cursor: "pointer",
     },
   };
 
@@ -229,6 +281,7 @@ const SearchInputs = () => {
                 variant="outlined"
               />
             )}
+            style={{ width: "100%" }}
           />
         </Box>
 
@@ -266,7 +319,7 @@ const SearchInputs = () => {
         </Box>
       </Box>
 
-      {/* <Box sx={styles.advancedSearchContainer}>
+      <Box sx={styles.advancedSearchContainer}>
         <Box sx={styles.commercialCheckboxContainer}>
           <FormControlLabel
             control={
@@ -279,10 +332,90 @@ const SearchInputs = () => {
             label="Show commercial properties only"
           />
         </Box>
-        <Typography variant="body1" sx={styles.advancedSearchText}>
-          Advanced search
-        </Typography>
-      </Box> */}
+
+        <Box sx={styles.advancedSearchContainer}>
+          <Typography
+            variant="body1"
+            sx={styles.advancedSearchText}
+            onClick={handleAdvanceSearch}
+          >
+            Advanced search
+            {advanceSearch ? (
+              <KeyboardArrowUpIcon />
+            ) : (
+              <KeyboardArrowDownIcon />
+            )}
+          </Typography>
+        </Box>
+      </Box>
+
+      {advanceSearch && (
+        <Box sx={{ display: "flex" }}>
+          <Box sx={styles.formControl}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel htmlFor="rentPeriod">Rent Period</InputLabel>
+              <Select
+                id="rentPeriod"
+                label="RentPeriod"
+                value={rentPeriod}
+                onChange={handleRentPeriodChange}
+                fullWidth
+              >
+                {["Monthly", "Weekly", "Daily"].map((property) => (
+                  <MenuItem key={property} value={property}>
+                    {property}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Box sx={styles.formControl}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel htmlFor="gender">Gender</InputLabel>
+              <Select
+                id="gender"
+                label="Gender"
+                value={gender}
+                onChange={handleGenderChange}
+                fullWidth
+              >
+                {["Male", "Female"].map((property) => (
+                  <MenuItem key={property} value={property}>
+                    {property}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={styles.formControl}>
+            <FormControl variant="outlined" fullWidth>
+              {/* <InputLabel htmlFor="minPrice">Min Price</InputLabel> */}
+              <TextField
+                type="number"
+                id="minPrice"
+                label="minPrice"
+                value={minPrice}
+                onChange={handleMinPriceInput}
+                fullWidth
+              />
+            </FormControl>
+          </Box>
+          <Box sx={styles.formControl}>
+            <FormControl variant="outlined" fullWidth>
+              {/* <InputLabel htmlFor="maxPrice">Max Price</InputLabel> */}
+              <TextField
+                type="number"
+                id="maxPrice"
+                label="maxPrice"
+                value={maxPrice}
+                onChange={handleMaxPriceInput}
+                fullWidth
+              />
+            </FormControl>
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 };
