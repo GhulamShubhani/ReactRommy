@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { cities } from "../../helper";
 import Dubai from "../../assets/Dubai.JPG";
-import NewYork from "../../assets/New York.JPG";
-import Riyadh from "../../assets/Riyadh.JPG";
+import AbuDhabi from "../../assets/New York.JPG";
+import Sharjah from "../../assets/Riyadh.JPG";
+import RasAlKima from "../../assets/Dubai.JPG";
+import UmmAlQuwain from "../../assets/New York.JPG";
+import Jeddah from "../../assets/Riyadh.JPG";
+import Ajman from "../../assets/Riyadh.JPG";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { NavLink } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const CityCarousel = () => {
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
@@ -51,9 +55,13 @@ const CityCarousel = () => {
   );
 
   const cityImages = [
-    { city: "New York", imageSrc: NewYork, altText: "New York" },
-    { city: "Dubai", imageSrc: Dubai, altText: "Dubai" },
-    { city: "Riyadh", imageSrc: Riyadh, altText: "Riyadh" },
+    { city: "Dubai", imageSrc: Dubai, altText: "New York" },
+    { city: "Abu Dhabi", imageSrc: AbuDhabi, altText: "Abu Dhabi" },
+    { city: "Sharjah", imageSrc: Sharjah, altText: "Sharjah" },
+    { city: "Ras Al Kima", imageSrc: RasAlKima, altText: "Ras Al Kima" },
+    { city: "Umm Al-Quwain", imageSrc: UmmAlQuwain, altText: "Umm Al-Quwain" },
+    { city: "Jeddah", imageSrc: Jeddah, altText: "Jeddah" },
+    { city: "Ajman", imageSrc: Ajman, altText: "Ajman" },
   ];
 
   const carouselItems = carouselCities.map((city, index) => {
@@ -89,17 +97,24 @@ const CityCarousel = () => {
         <Box
           sx={{
             position: "absolute",
-            bottom: "4",
-            left: "0",
-            right: "0",
+            // bottom: "4",
+            // left: "0",
+            // right: "0",
             color: "white",
-            fontWeight: "bold",
-            textAlign: "butoom",
-            fontSize: "1.3rem",
+            display: "flex",
+            justifyContent: "center",
+            alignSelf: "end",
+            mb: isActive ? 6 :"",
+
+            // textAlign: "butoom",
+            // marginTop: "auto",
+
             textShadow: "6px 6px 5px black",
           }}
         >
-          {city}
+          <Typography sx={{ fontWeight: "bold", fontSize: "1.3rem" }}>
+            {city}
+          </Typography>
         </Box>
       </Box>
     );
