@@ -183,13 +183,10 @@ const SearchInputs = () => {
 
   const styles = {
     searchContainer: {
-      display: "grid",
+      display: "flex",
       gap: 2,
-      gridTemplateColumns: "1fr",
+      flexDirection: { xs: "column", lg: "row" },
       marginBottom: 2,
-      "@media (min-width: 600px)": {
-        gridTemplateColumns: "1fr 1fr", // Two fields for displays with min-width 600px
-      },
     },
     formControl: {
       flex: { xs: "1 1 100%", lg: "1 1 auto" },
