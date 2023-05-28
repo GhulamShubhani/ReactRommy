@@ -125,14 +125,21 @@ const OurServices = () => {
       >
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item xs={12} sm={8}>
-            <Box sx={{ pt: { xs: 8, md: 13 }, px: { xs: 2, md: 2 } }}>
+            <Box
+              sx={{
+                pt: { xs: 8, md: 13 },
+                px: { xs: 2, md: 2 },
+                ml: { xs: 0, sm: 0, md: 12 },
+              }}
+            >
               <Typography
                 variant="h3"
                 sx={{
                   fontWeight: "bold",
                   color: "white",
                   mb: 3,
-                  px: { xs: 1, md: 6 },
+                  px: { xs: 1 },
+
                   textAlign: { xs: "center", md: "left" },
                 }}
               >

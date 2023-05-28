@@ -19,7 +19,7 @@ const Search = () => {
         padding: "20px",
         borderRadius: "10px",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-        margin: "20px 0 0 10%",
+        //margin: "20px 0 0 10%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
