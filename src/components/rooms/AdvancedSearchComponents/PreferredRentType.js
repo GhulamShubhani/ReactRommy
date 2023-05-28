@@ -1,57 +1,41 @@
-import React, { useState } from "react";
-import {
-  FormGroup,
-  Typography,
-  Grid,
-  FormControlLabel,
-  Radio,
-} from "@mui/material";
+import React from "react";
+import { MenuItem, FormControl, Select, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { AdvanceSearchActions } from "../../../store/AdvanceSearch";
 
 const PreferredRentType = () => {
-  const [selectedValue, setSelectedValue] = useState("");
-
   const dispatch = useDispatch();
+  const rentType = useSelector(
+    (state) => state.advanceSearch.preferredRentType
+  );
 
-  const handleRadioChange = (event) => {
-    const value = event.target.value;
-    setSelectedValue(value);
-    dispatch(AdvanceSearchActions.preferredRentType(value));
+  const handleGenderSelection = (e) => {
+    dispatch(AdvanceSearchActions.preferredRentType(e.target.value));
   };
 
+  const cityOptions = ["Monthly", "Weekly", "Daily"].map((city) => (
+    <MenuItem key={city} value={city}>
+      {city}
+    </MenuItem>
+  ));
+
   return (
-    <FormGroup sx={{ my: 3 }}>
+    <FormControl sx={{ width: "100%" }}>
       <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: "bold" }}>
-        Rent period
+        Rent
       </Typography>
-      <Grid container direction="column">
-        <Grid item>
-          <FormControlLabel
-            control={<Radio checked={selectedValue === "Monthly"} />}
-            label="Monthly"
-            value="Monthly"
-            onChange={handleRadioChange}
-          />
-        </Grid>
-        <Grid item>
-          <FormControlLabel
-            control={<Radio checked={selectedValue === "Weekly"} />}
-            label="Weekly"
-            value="Weekly"
-            onChange={handleRadioChange}
-          />
-        </Grid>
-        <Grid item>
-          <FormControlLabel
-            control={<Radio checked={selectedValue === "Daily"} />}
-            label="Daily"
-            value="Daily"
-            onChange={handleRadioChange}
-          />
-        </Grid>
-      </Grid>
-    </FormGroup>
+      <Select
+        value={rentType}
+        onChange={handleGenderSelection}
+        displayEmpty
+        renderValue={(selected) => selected || "Rent type"}
+      >
+        <MenuItem disabled value="">
+          <em>Select Rent type</em>
+        </MenuItem>
+        {cityOptions}
+      </Select>
+    </FormControl>
   );
 };
 
