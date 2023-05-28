@@ -32,6 +32,7 @@ const SecondPage = () => {
   const availableRooms = useSelector((state) => state.search.availableRooms);
   const searchType = useSelector((state) => state.search.searchType);
   const action = useSelector((state) => state.search.action);
+
   const dispatch = useDispatch();
   const [locationData, setLocationData] = useState([]);
   const token = localStorage.getItem("token");
@@ -222,9 +223,9 @@ const SecondPage = () => {
                       ? `NEED ROOM in ${city}`
                       : `All rooms in ${city}`}
                   </Typography>
-                  <Typography variant="subtitle2">
+                  {/* <Typography variant="subtitle2">
                     {Object.keys(availableRooms).length} results
-                  </Typography>
+                  </Typography> */}
                 </Box>
 
                 {/* <Box sx={{ display: "flex", flexDirection: "row" }}>

@@ -94,7 +94,11 @@ const AdvancedSearch = () => {
       {advance && <Gender />}
       {advance && <PreferredRentType />}
       <Grid container justifyContent="space-between" alignItems="center">
-        <Typography variant="subtitle1" onClick={AdvanceSearchOptionsHandler}>
+        <Typography
+          variant="subtitle1"
+          onClick={AdvanceSearchOptionsHandler}
+          sx={{ cursor: "pointer" }}
+        >
           ADVANCE {advance ? "^" : ""}
         </Typography>
         <Button variant="contained" onClick={advanceSearchHandler}>

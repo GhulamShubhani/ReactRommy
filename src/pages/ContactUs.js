@@ -154,13 +154,13 @@ const ContactUs = () => {
           </Grid>
         </Grid>
         <Grid container justifyContent={"center"} my={2}>
-          <Button
+          {/* <Button
             variant="contained"
             color="error"
             onClick={handleDeleteUserAccount}
           >
             Delete Account
-          </Button>
+          </Button> */}
         </Grid>
         <Dialog
           open={deleteDialogOpen}

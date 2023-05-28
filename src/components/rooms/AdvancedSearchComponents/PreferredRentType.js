@@ -28,17 +28,17 @@ const PreferredRentType = () => {
       <Grid container direction="column">
         <Grid item>
           <FormControlLabel
-            control={<Radio checked={selectedValue === "Yearly"} />}
-            label="Yearly"
-            value="Yearly"
+            control={<Radio checked={selectedValue === "Monthly"} />}
+            label="Monthly"
+            value="Monthly"
             onChange={handleRadioChange}
           />
         </Grid>
         <Grid item>
           <FormControlLabel
-            control={<Radio checked={selectedValue === "Monthly"} />}
-            label="Monthly"
-            value="Monthly"
+            control={<Radio checked={selectedValue === "Weekly"} />}
+            label="Weekly"
+            value="Weekly"
             onChange={handleRadioChange}
           />
         </Grid>

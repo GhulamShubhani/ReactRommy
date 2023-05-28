@@ -99,9 +99,16 @@ const OurServices = () => {
           top: 0,
           left: 0,
           width: "100%",
-          height: "45vh",
-          backgroundImage:
-            "linear-gradient(90deg, rgba(0,1,36,1) 0%, rgba(73,9,121,1) 35%, rgba(192,0,255,1) 100%);", // Update this line
+          height: "100vh",
+          backgroundImage: `
+      linear-gradient(
+        90deg,
+        rgba(128, 0, 128, 1) 0%,
+        rgba(160, 32, 160, 1) 25%,
+        rgba(192, 64, 192, 1) 50%,
+        rgba(224, 96, 224, 1) 75%,
+        rgba(255, 128, 255, 1) 100%
+      )`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           marginBottom: "50px",
@@ -118,14 +125,14 @@ const OurServices = () => {
       >
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item xs={12} sm={8}>
-            <Box sx={{ pt: { xs: 10, md: 16 }, pl: { xs: 0, md: 2 } }}>
+            <Box sx={{ pt: { xs: 8, md: 13 }, px: { xs: 2, md: 2 } }}>
               <Typography
                 variant="h3"
                 sx={{
                   fontWeight: "bold",
                   color: "white",
                   mb: 3,
-                  pl: { xs: 0, md: 3 },
+                  px: { xs: 1, md: 6 },
                   textAlign: { xs: "center", md: "left" },
                 }}
               >
@@ -140,9 +147,20 @@ const OurServices = () => {
             sm={4}
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            <FloatingImage />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "flex-end",
+                height: "100%",
+                position: "relative",
+              }}
+            >
+              <FloatingImage />
+            </Box>
           </Grid>
         </Grid>
+
         <Box sx={{ pt: { xs: 6 } }}>
           <CityCarousel />
           <Rooms />
