@@ -93,13 +93,24 @@ const ContactUs = () => {
           >
             <Box
               sx={{
-                width: 80,
-                height: 100,
+                width: "65px",
+                height: "90px",
+                mt: 1,
+                mr: 2,
+
+                // backgroundImage: `url(${UAE2})`,
+                // backgroundRepeat: "no-repeat",
+                // backgroundSize: "cover",
 
                 //  borderRadius: "50%",
               }}
             >
-              <Avatar
+              <img
+                src={UAE2}
+                alt="Peoples"
+                style={{ width: "80px", height: "40px" }}
+              />
+              {/* <Avatar
                 alt="UAE"
                 src={UAE1}
                 variant="square"
@@ -108,7 +119,7 @@ const ContactUs = () => {
                   objectFit: "cover",
                   //  borderRadius: "50%",
                 }}
-              />
+              /> */}
             </Box>
             <Box>
               <Typography
@@ -135,13 +146,20 @@ const ContactUs = () => {
           >
             <Box
               sx={{
-                width: 100,
-                height: 100,
+                width: "80px",
+                height: "90px",
+                mt: 1,
+                mr: 2,
 
                 //  borderRadius: "50%",
               }}
             >
-              <Avatar
+              <img
+                src={USA1}
+                alt="Peoples"
+                style={{ width: "80px", height: "40px" }}
+              />
+              {/* <Avatar
                 alt="UAE"
                 src={USA1}
                 variant="square"
@@ -152,7 +170,7 @@ const ContactUs = () => {
                   objectFit: "cover",
                   //  borderRadius: "50%",
                 }}
-              />
+              /> */}
             </Box>
             <Box>
               <Typography

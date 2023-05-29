@@ -26,6 +26,7 @@ const CityCarousel = () => {
     updateCarouselCities();
   }, [currentCityIndex]);
 
+  
   const handlePrevClick = () => {
     const newIndex =
       currentCityIndex === 0 ? cities.length - 1 : currentCityIndex - 1;
@@ -104,7 +105,7 @@ const CityCarousel = () => {
             display: "flex",
             justifyContent: "center",
             alignSelf: "end",
-            mb: isActive ? 6 : "",
+            mb: isActive ? 9 : "",
 
             // textAlign: "butoom",
             // marginTop: "auto",

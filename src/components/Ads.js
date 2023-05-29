@@ -28,14 +28,14 @@ const Ads = () => {
       selectedItem={currentIndex}
       onChange={(index) => setCurrentIndex(index)}
     >
-      <div>
-        <img src={followUs} alt="Follow Us" />
+      <div style={{ borderRadius: "40px" }}>
+        <img src={followUs} alt="Follow Us"  />
       </div>
-      <div>
-        <img src={peoples} alt="Peoples" />
+      <div style={{ borderRadius: "40px" }}>
+        <img src={peoples} alt="Peoples"  />
       </div>
-      <div>
-        <img src={girls} alt="Girls" />
+      <div style={{ borderRadius: "40px" }}>
+        <img src={girls} alt="Girls"  />
       </div>
     </Carousel>
   );
